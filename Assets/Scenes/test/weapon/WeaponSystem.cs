@@ -12,33 +12,42 @@ public class WeaponSystem : MonoBehaviour
     private void Awake()
     {
         weaponList = Resources.Load<WeaponList>(typeof(WeaponList).Name);
-        weaponData = weaponList.list[0];
+        if (weaponList != null)
+        {
+            weaponData = weaponList.list[0];
+            AimSystem.UpdateWeapon(weaponData);
+        }
+        
     }
     private void Update()
     {
-        if (weaponList != null)
-        {
-            ChangeWeapon();
-            AimSystem.UpdateWeapon(weaponData);
-        }
+        ChangeWeapon();
     }
     void ChangeWeapon()
     {
+        //下一把
         if (Input.GetKeyUp(KeyCode.Q))
         {
             ++weaponIndex;
-            if (weaponList.list.Count > weaponIndex)
-            {
-                weaponData = weaponList.list[weaponIndex];
-                AimSystem.UpdateWeapon(weaponData);
-            }
-            else
+            if(weaponList.list.Count == weaponIndex) 
             {
                 weaponIndex = 0;
             }
+            weaponData = weaponList.list[weaponIndex];
+            AimSystem.UpdateWeapon(weaponData);
+            
         }
+
+        //上一把
         if (Input.GetKeyUp(KeyCode.E))
         {
+            --weaponIndex;
+            if (-1 == weaponIndex)
+            {
+                weaponIndex = weaponList.list.Count-1;
+            }
+            weaponData = weaponList.list[weaponIndex];
+            AimSystem.UpdateWeapon(weaponData);
 
         }
     }

@@ -28,7 +28,7 @@ public class playControl : MonoBehaviour
     void Update()
     {
         Move();
-        Flip();
+        //Flip();用枪口方向确定人的方向
         Attack();
     }
     void Move()

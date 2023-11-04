@@ -15,5 +15,6 @@ MonoBehaviour:
   weaponSprite: {fileID: -353751291, guid: 0d5e657ee5a074e4baa53d5b248a01d2, type: 3}
   weaponName: pistol
   weaponType: pistol
-  weaponInfo: "\u8FD9\u662F\u4E00\u628A\u624B\u67AA"
-  weaponPrefab: {fileID: 0}
+  weaponInfo: "\u624B\u67AA"
+  weaponPrefab: {fileID: 1020423309417146405, guid: ca161f3e9c3bdca41a42eaf17b219869, type: 3}
+  FireTimer: 0.5

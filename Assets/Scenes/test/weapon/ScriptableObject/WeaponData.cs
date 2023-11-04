@@ -12,4 +12,7 @@ public class WeaponData : ScriptableObject
     [TextArea] public string weaponInfo;
     public GameObject weaponPrefab;
 
+    //×Óµ¯
+    public float FireTimer;//ÉäËÙ
+
 }
