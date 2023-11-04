@@ -56,7 +56,7 @@ public class playControl : MonoBehaviour
             {
                 transform.localRotation = Quaternion.Euler(0,0,0);
             }
-            if (rbody.velocity.x < Mathf.Epsilon)
+            if (rbody.velocity.x < -Mathf.Epsilon)
             {
                 transform.localRotation = Quaternion.Euler(0, 180, 0);
             }

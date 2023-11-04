@@ -6,9 +6,10 @@ using UnityEngine;
 //ÎäÆ÷Êý¾ÝÄ£°å
 public class WeaponData : ScriptableObject
 {
-    public Sprite WeaponSprite;
-    public string WeaponName;
-    public string WeaponType;
-    [TextArea] public string WeaponInfo;
+    public Sprite weaponSprite;
+    public string weaponName;
+    public string weaponType;
+    [TextArea] public string weaponInfo;
+    public GameObject weaponPrefab;
 
 }

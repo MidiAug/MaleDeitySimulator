@@ -10,9 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b33e6ab1fce05f64a9f2ec08a0bdfd94, type: 3}
-  m_Name: rifle
+  m_Name: pistol
   m_EditorClassIdentifier: 
-  weaponSprite: {fileID: -144335857, guid: 0d5e657ee5a074e4baa53d5b248a01d2, type: 3}
-  weaponName: rifle
-  weaponType: rifle
-  weaponInfo: 
+  weaponSprite: {fileID: -353751291, guid: 0d5e657ee5a074e4baa53d5b248a01d2, type: 3}
+  weaponName: pistol
+  weaponType: pistol
+  weaponInfo: "\u8FD9\u662F\u4E00\u628A\u624B\u67AA"
+  weaponPrefab: {fileID: 0}
