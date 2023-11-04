@@ -11,6 +11,7 @@ public class playControl : MonoBehaviour
     private Transform trans;
     private SpriteRenderer sRenderer;
     public float speedCoef;
+    private float health_;
 
     // Start is called before the first frame update
     void Start()
@@ -19,7 +20,7 @@ public class playControl : MonoBehaviour
         rbody = GetComponent<Rigidbody2D>();
         trans = GetComponent<Transform>();
         sRenderer = GetComponent<SpriteRenderer>();
-
+        health_ = 10.0f;
         speedCoef = 5.0f;
     }
 
@@ -68,5 +69,11 @@ public class playControl : MonoBehaviour
         {
             ani.SetTrigger("Attack");
         }
+    }
+    void Attacked()
+    {
+        WarriorEnemyController enemy=GetComponent<WarriorEnemyController>();
+        if(enemy!=null)
+            health_ = health_ > 0 ? health_ - enemy.harsh_ : health_;
     }
 }
