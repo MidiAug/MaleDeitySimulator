@@ -11,6 +11,7 @@ public class BaseEnemy : MonoBehaviour
     /// <summary>
     /// 敌人基础属性
     /// </summary>
+    public float health =100f;
     public float speed_ = 5f;//敌人移动速度
     private Rigidbody2D enemy_body_;//敌人的刚体
     public bool is_vertical;//判断是否垂直移动
@@ -38,7 +39,18 @@ public class BaseEnemy : MonoBehaviour
     /// </summary>
     void Update()
     {
-        EnemyMove();
+        //EnemyMove();
+        if(health <Mathf.Epsilon)
+            Destroy(this.gameObject);
+        enemy_body_.velocity = Vector2.zero;
+}
+public virtual void Attack() { }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("Player") && collision.GetType().ToString() == "UnityEngine.CapsuleCollider2D")
+        {
+            collision.gameObject.GetComponent<PlayerControl>().Attacked(10);
+            print("1");
+        }
     }
-    public virtual void Attack() { }
 }

@@ -4,15 +4,19 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
-public class playControl : MonoBehaviour
+public class PlayerControl : MonoBehaviour
 {
+    
     private Animator ani;
     private Rigidbody2D rbody;
     private Transform trans;
     private SpriteRenderer sRenderer;
-    public float speedCoef;
-    private float health_;
 
+    public float moveSpeed = 5f;
+    public float hp = 100;
+    public int NumBlink;
+    public float BlinkTime;
+    public float dieTime;
     // Start is called before the first frame update
     void Start()
     {
@@ -20,8 +24,6 @@ public class playControl : MonoBehaviour
         rbody = GetComponent<Rigidbody2D>();
         trans = GetComponent<Transform>();
         sRenderer = GetComponent<SpriteRenderer>();
-        health_ = 10.0f;
-        speedCoef = 5.0f;
     }
 
     // Update is called once per frame
@@ -45,8 +47,8 @@ public class playControl : MonoBehaviour
         ani.SetBool("Idle", playerIdle);
 
         Vector2 dir = new Vector2(horizontal, vertical);
-        if (horizontal * vertical != 0) rbody.velocity = dir * speedCoef * (float)System.Math.Sqrt(0.5f);//斜着走速度*根号2
-        else rbody.velocity = dir * speedCoef;
+        if (horizontal * vertical != 0) rbody.velocity = dir * 5f * (float)System.Math.Sqrt(0.5f);//斜着走速度*根号2
+        else rbody.velocity = dir * 5f;
     }
     void Flip()
     {
@@ -68,12 +70,45 @@ public class playControl : MonoBehaviour
         if (Input.GetButton("Attack"))
         {
             ani.SetTrigger("Attack");
+            
         }
     }
-    void Attacked()
+    public void Attacked(float damage)
     {
-        WarriorEnemyController enemy=GetComponent<WarriorEnemyController>();
-        if(enemy!=null)
-            health_ = health_ > 0 ? health_ - enemy.harsh_ : health_;
+        //WarriorEnemyController enemy=GetComponent<WarriorEnemyController>();
+        //if (enemy != null) { return; }
+        //characterData.hp = characterData.hp > 0 ? characterData.hp - enemy.harsh_ : characterData.hp;
+
+        hp -= damage;
+        if (hp < Mathf.Epsilon)
+        {
+            ani.SetTrigger("Die");
+            for (int i = 0; i < transform.childCount; i++)
+            {
+                Debug.Log(transform.GetChild(i).name);
+                Destroy(transform.GetChild(i));
+            }
+            
+            Invoke("KillPlayer", dieTime);
+        }
+        BlinkPlayer(NumBlink, BlinkTime);
+    }
+
+    private void KillPlayer()
+    {
+        Destroy(gameObject);
+    }
+    private void BlinkPlayer(int num,float time)
+    {
+        StartCoroutine(DoBlinkPlayer(num,time));
+    }
+    IEnumerator DoBlinkPlayer(int num, float time)
+    {
+        for (int i = 0; i < num*2; i++)
+        {
+            sRenderer.enabled = !sRenderer.enabled;
+            yield return new WaitForSeconds(time);
+        }
+        sRenderer.enabled = true;
     }
 }
