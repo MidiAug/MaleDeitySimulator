@@ -6,7 +6,7 @@ using UnityEngine;
 /// 敌人控制脚本
 /// </summary>
 
-public class WarriorEnemyController : MonoBehaviour
+public class BaseEnemy : MonoBehaviour
 {
     /// <summary>
     /// 敌人基础属性
@@ -19,7 +19,7 @@ public class WarriorEnemyController : MonoBehaviour
     void Start()
     {
         enemy_body_ = GetComponent<Rigidbody2D>();
-        move_direction_=is_vertical? Vector2.up : Vector2.right;
+        move_direction_ = is_vertical ? Vector2.up : Vector2.right;
     }
 
     /// <summary>
@@ -40,4 +40,5 @@ public class WarriorEnemyController : MonoBehaviour
     {
         EnemyMove();
     }
+    public virtual void Attack() { }
 }
