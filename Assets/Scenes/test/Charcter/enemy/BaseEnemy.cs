@@ -17,34 +17,40 @@ public class BaseEnemy : MonoBehaviour
     public bool is_vertical;//判断是否垂直移动
     private Vector2 move_direction_;//移动方向
     public float harsh_ = 1f;
-    void Start()
+    public float track_radius = 20000f;
+    private Transform player_transform_;
+    virtual public void Start()
     {
         enemy_body_ = GetComponent<Rigidbody2D>();
         move_direction_ = is_vertical ? Vector2.up : Vector2.right;
+        //获取玩家的位置
+        player_transform_ = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
     }
 
     /// <summary>
     /// 敌人移动函数
     /// </summary>
-    void EnemyMove()
+    virtual public void EnemyMove()
     {
-        Vector2 position = enemy_body_.position;
-        position.x += move_direction_.x * speed_ * Time.deltaTime;
-        position.y += move_direction_.y * speed_ * Time.deltaTime;
-        enemy_body_.MovePosition(position);
+        if(player_transform_ != null){
+            float distance=(transform.position - player_transform_.position).sqrMagnitude;
+            if (distance < track_radius){
+                transform.position=Vector2.MoveTowards(transform.position,player_transform_.position,speed_*Time.deltaTime);
+            }
+        }
     }
 
     /// <summary>
     /// 刷新敌人状态
     /// </summary>
-    void Update()
+    virtual public void Update()
     {
-        //EnemyMove();
+        EnemyMove();
         if(health <Mathf.Epsilon)
             Destroy(this.gameObject);
         enemy_body_.velocity = Vector2.zero;
 }
-public virtual void Attack() { }
+    public virtual void Attack() { }
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("Player") && collision.GetType().ToString() == "UnityEngine.CapsuleCollider2D")
