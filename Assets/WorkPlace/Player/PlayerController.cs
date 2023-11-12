@@ -19,6 +19,7 @@ public class PlayerController : MonoBehaviour
     public float dieTime;
 
     private bool die = false;
+    private bool isInvincible;
     // Start is called before the first frame update
     void Start()
     {
@@ -56,19 +57,23 @@ public class PlayerController : MonoBehaviour
 
     public void Attacked(float damage)
     {
-        hp -= damage;
-        if (hp < Mathf.Epsilon)
+        if (!isInvincible)
         {
-            ani.SetTrigger("Die");
-            for (int i = 0; i < transform.childCount; i++)
+            isInvincible = true;
+            hp -= damage;
+            if (hp < Mathf.Epsilon)
             {
-                Destroy(transform.GetChild(i).gameObject);
+                ani.SetTrigger("Die");
+                for (int i = 0; i < transform.childCount; i++)
+                {
+                    Destroy(transform.GetChild(i).gameObject);
+                }
+                die = true;
+                rbody.velocity = Vector2.zero;
+                Invoke("KillPlayer", dieTime);
             }
-            die = true;
-            rbody.velocity = Vector2.zero;
-            Invoke("KillPlayer", dieTime);
+            BlinkPlayer(NumBlink, BlinkTime);
         }
-        BlinkPlayer(NumBlink, BlinkTime);
     }
 
     // 销毁人物对象
@@ -90,5 +95,6 @@ public class PlayerController : MonoBehaviour
             yield return new WaitForSeconds(time);
         }
         sRenderer.enabled = true;
+        isInvincible = false;
     }
 }

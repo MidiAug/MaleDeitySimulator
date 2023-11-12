@@ -35,11 +35,11 @@ public class EnemyController : MonoBehaviour
             rigidbody2.velocity = Vector2.zero;
         }
     }
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerStay2D(Collider2D collision)
     {
         if (!die)
         {
-            if (collision.gameObject.tag == "Player")
+            if (collision.gameObject.tag == "Player"&&collision.GetType().ToString()== "UnityEngine.CapsuleCollider2D")
             {
                 collision.GetComponent<PlayerController>().Attacked(10f);
             }
@@ -57,7 +57,8 @@ public class EnemyController : MonoBehaviour
                 Destroy(transform.GetChild(i).gameObject);
             }
             Invoke("DestorySelf", 1f);
-            boxCollider2.isTrigger = true;
+            Destroy(gameObject.GetComponent<BoxCollider2D>());
+            Destroy(gameObject.GetComponent<CapsuleCollider2D>());
         }
     }
     void DestorySelf()
