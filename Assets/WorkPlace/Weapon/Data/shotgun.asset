@@ -10,11 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b33e6ab1fce05f64a9f2ec08a0bdfd94, type: 3}
-  m_Name: rifle
+  m_Name: shotgun
   m_EditorClassIdentifier: 
-  weaponSprite: {fileID: -144335857, guid: 0d5e657ee5a074e4baa53d5b248a01d2, type: 3}
-  weaponName: rifle
-  weaponType: rifle
-  weaponInfo: "\u6B65\u67AA\n"
-  weaponPrefab: {fileID: 7804617253393244797, guid: 0a0a897a9ba289e4686938dea4b3c2ff, type: 3}
-  FireTimer: 0.2
+  sprite: {fileID: 21300000, guid: d51fffd145310da4b9ed7a945c797ad5, type: 2}
+  Name: shotgun
+  type: shotgun
+  damage: 40
+  info: "\u9730\u5F39\u67AA"
+  prefab: {fileID: 255800368237400470, guid: 086f161066e36c442a26221b52880e22, type: 3}
+  FireTimer: 0.75

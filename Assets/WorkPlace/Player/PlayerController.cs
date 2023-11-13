@@ -15,12 +15,13 @@ public class PlayerController : MonoBehaviour
     public float moveSpeed = 5f;
     public float maxHp = 100;
     public float curHp;
+    public bool die = false;
+    private bool isInvincible;
+
     public int NumBlink;
     public float BlinkTime;
     public float dieTime;
 
-    private bool die = false;
-    private bool isInvincible;
     // Start is called before the first frame update
     void Start()
     {
@@ -58,6 +59,7 @@ public class PlayerController : MonoBehaviour
         else rbody.velocity = dir * 5f;
     }
 
+    // ÊÕµ½¹¥»÷
     public void Attacked(float damage)
     {
         if (!isInvincible)
@@ -75,7 +77,10 @@ public class PlayerController : MonoBehaviour
                 rbody.velocity = Vector2.zero;
                 Invoke("KillPlayer", dieTime);
             }
-            BlinkPlayer(NumBlink, BlinkTime);
+            if(!die)
+            {
+                BlinkPlayer(NumBlink, BlinkTime);
+            }
         }
     }
 

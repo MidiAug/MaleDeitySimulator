@@ -4,8 +4,14 @@ using UnityEngine;
 
 public class EnemySystem : MonoBehaviour
 {
+    // 引用
     EnemyData enemyData;
     EnemyList enemyList;
+
+    //组件及对象
+    GameObject enemy;
+
+    //
     private void Awake()
     {
         enemyList = Resources.Load<EnemyList>(typeof(EnemyList).Name);
@@ -17,10 +23,18 @@ public class EnemySystem : MonoBehaviour
     }
     private void Start()
     {
-        if (enemyData != null)
+        enemy = GameObject.Find("Enemy");
+    }
+    private void Update()
+    {
+        if (enemy.transform.childCount == 0)
         {
+            if (enemyData != null)
+            {
 
-            //Instantiate(enemyData.enemyPrefab,GameObject.FindGameObjectWithTag("Player").transform.position+Vector3.right,Quaternion.identity);
+                Instantiate(enemyData.enemyPrefab, GameObject.FindGameObjectWithTag("Player").transform.position + Vector3.right*5, Quaternion.identity,enemy.transform);
+            }
         }
+
     }
 }

@@ -6,24 +6,25 @@ using UnityEngine;
 public class VisitWeapon : MonoBehaviour
 {
     public WeaponData weaponData;
-    public float timer = 0;
     public GameObject bullet;
     private Rigidbody2D rb;
     private Transform bulletPos;
+
+    public float timer = 0;
     public float gunForce;
     private bool isFire = false;
    
     void Start()
     {
-        bulletPos = this.gameObject.transform.GetChild(0);
+        bulletPos = transform.GetChild(0);
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetMouseButton(0))//鼠标左键发射
+        if (Input.GetMouseButton(0))//鼠标左键发射
         {
-            FireFuntion();
+            Fire();
         }
     }
 
@@ -36,7 +37,7 @@ public class VisitWeapon : MonoBehaviour
         isFire = false;
     }
     //射击方法
-    private void FireFuntion()
+    private void Fire()
     {
         timer += Time.deltaTime;
         if (timer >= weaponData.FireTimer)
@@ -50,7 +51,6 @@ public class VisitWeapon : MonoBehaviour
     private void FireBullet()
     {
         Quaternion rotarionOffset = Quaternion.AngleAxis(270, Vector3.forward);
-        Vector3 bulletPosOffset = new Vector3(0f,0.05f,0f);
         GameObject newBullet = Instantiate(bullet, bulletPos.position, this.gameObject.transform.rotation * rotarionOffset);//子弹图片向上
 
         rb = newBullet.gameObject.GetComponent<Rigidbody2D>();

@@ -16,6 +16,6 @@ MonoBehaviour:
   Name: hyr
   race: dog
   maxHp: 250
-  moveSpeed: 5
+  moveSpeed: 2
   enemyInfo: "\u81ED\u50BB\u903C"
   enemyPrefab: {fileID: 9000118276211687339, guid: ee484be68e63ce840ae1772809913e1f, type: 3}

@@ -71,12 +71,12 @@ public class AimSystem : MonoBehaviour
     {
         if(instance.gameObject.transform.childCount>1)
         {
-            instance.currentWeapon = Instantiate(weaponData.weaponPrefab, instance.transform);
+            instance.currentWeapon = Instantiate(weaponData.prefab, instance.transform);
         }
         else
         {
             Destroy(instance.currentWeapon);
-            instance.currentWeapon = Instantiate(weaponData.weaponPrefab, instance.transform);
+            instance.currentWeapon = Instantiate(weaponData.prefab, instance.transform);
         }
     }
 }
