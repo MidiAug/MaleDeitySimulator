@@ -4,6 +4,9 @@ using UnityEditor.U2D.Animation;
 using UnityEngine;
 using UnityEngine.UI;
 
+/// <summary>
+/// ÀàËÆµĞÈËÑªÌõUI
+/// </summary>
 public class HpUI : MonoBehaviour
 {
     Slider hp;

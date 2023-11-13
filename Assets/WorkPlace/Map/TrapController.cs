@@ -5,15 +5,12 @@ using UnityEngine;
 
 public class TrapController : MonoBehaviour
 {
-    // 引用
+    // 玩家对象
     PlayerController player;
 
-    // 组件
-
-    // 属性
+    // 伤害
     public float damage;
 
-    // Start is called before the first frame update
     private void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
@@ -21,7 +18,7 @@ public class TrapController : MonoBehaviour
     private void OnTriggerStay2D(Collider2D collision)
     {
         
-        if (collision.gameObject.CompareTag( "Player")&&collision.GetType().ToString() == "UnityEngine.CapsuleCollider2D")
+        if (collision.gameObject.CompareTag("Player")&&collision.GetType().ToString() == "UnityEngine.CapsuleCollider2D")
         {
             player.Attacked(damage);
         }

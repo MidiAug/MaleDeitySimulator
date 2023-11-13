@@ -18,4 +18,4 @@ MonoBehaviour:
   damage: 20
   info: "\u624B\u67AA"
   prefab: {fileID: 1020423309417146405, guid: ca161f3e9c3bdca41a42eaf17b219869, type: 3}
-  FireTimer: 0.5
+  FireTimer: 0.2

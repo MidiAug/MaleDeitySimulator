@@ -16,15 +16,15 @@ public class PlayerController : MonoBehaviour
     public float maxHp = 100;
     public float curHp;
     public bool die = false;
-    private bool isInvincible;
+    private bool isInvincible;//判断是否无敌，用于限制角色掉血方法调用间隔过短
 
-    public int NumBlink;
-    public float BlinkTime;
+    public int numBlink;
+    public float blinkTime;
     public float dieTime;
 
-    // Start is called before the first frame update
     void Start()
     {
+        // 获取组件，初始化角色血量
         ani = GetComponent<Animator>();
         rbody = GetComponent<Rigidbody2D>();
         trans = GetComponent<Transform>();
@@ -33,14 +33,15 @@ public class PlayerController : MonoBehaviour
         curHp = maxHp;
     }
 
-    // Update is called once per frame
     void Update()
     {
-        if(!die)
+        if (!die)
         {
             Move();
         }
     }
+
+    // 角色的移动方法
     void Move()
     {
         float horizontal = Input.GetAxisRaw("Horizontal");
@@ -59,7 +60,7 @@ public class PlayerController : MonoBehaviour
         else rbody.velocity = dir * 5f;
     }
 
-    // 收到攻击
+    // 受到攻击
     public void Attacked(float damage)
     {
         if (!isInvincible)
@@ -75,11 +76,13 @@ public class PlayerController : MonoBehaviour
                 }
                 die = true;
                 rbody.velocity = Vector2.zero;
+
+                //在一定时间后销毁玩家对象，这段时间用于播放玩家的死亡动画
                 Invoke("KillPlayer", dieTime);
             }
-            if(!die)
+            if (!die)
             {
-                BlinkPlayer(NumBlink, BlinkTime);
+                BlinkPlayer(numBlink, blinkTime);
             }
         }
     }
@@ -91,18 +94,29 @@ public class PlayerController : MonoBehaviour
     }
 
     // 人物收到攻击动画
-    private void BlinkPlayer(int num,float time)
+    private void BlinkPlayer(int num, float time)
     {
-        StartCoroutine(DoBlinkPlayer(num,time));
+        // 启动协程，播放闪烁动画
+        StartCoroutine(DoBlinkPlayer(num, time));
     }
+
+    // 协程(IEnumerator)用于播放人物受到攻击时的闪烁动画
     IEnumerator DoBlinkPlayer(int num, float time)
     {
-        for (int i = 0; i < num*2; i++)
+        // 循环执行闪烁的次数（每次循环切换显示和隐藏）
+        for (int i = 0; i < num * 2; i++)
         {
+            // 切换人物的渲染状态，实现显示和隐藏的效果
             sRenderer.enabled = !sRenderer.enabled;
+
+            // 等待指定的时间间隔
             yield return new WaitForSeconds(time);
         }
+
+        // 循环结束后，将人物的渲染状态设置为显示
         sRenderer.enabled = true;
+
+        // 表示角色可以接受下一次伤害
         isInvincible = false;
     }
 }
