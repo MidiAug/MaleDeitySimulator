@@ -13,7 +13,8 @@ public class PlayerController : MonoBehaviour
 
     //人物相关属性
     public float moveSpeed = 5f;
-    public float hp = 100;
+    public float maxHp = 100;
+    public float curHp;
     public int NumBlink;
     public float BlinkTime;
     public float dieTime;
@@ -27,6 +28,8 @@ public class PlayerController : MonoBehaviour
         rbody = GetComponent<Rigidbody2D>();
         trans = GetComponent<Transform>();
         sRenderer = GetComponent<SpriteRenderer>();
+
+        curHp = maxHp;
     }
 
     // Update is called once per frame
@@ -60,8 +63,8 @@ public class PlayerController : MonoBehaviour
         if (!isInvincible)
         {
             isInvincible = true;
-            hp -= damage;
-            if (hp < Mathf.Epsilon)
+            curHp -= damage;
+            if (curHp < Mathf.Epsilon)
             {
                 ani.SetTrigger("Die");
                 for (int i = 0; i < transform.childCount; i++)

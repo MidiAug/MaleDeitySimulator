@@ -7,15 +7,17 @@ using UnityEngine.UI;
 public class HpUI : MonoBehaviour
 {
     Slider hp;
+    PlayerController playerController;
     // Start is called before the first frame update
     void Start()
     {
         hp = GetComponent<Slider>();
+        playerController = transform.Find("../..").gameObject.GetComponent<PlayerController>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        hp.value = transform.Find("../..").gameObject.GetComponent<PlayerController>().hp / 100f;
+        hp.value = playerController.curHp / playerController.maxHp;
     }
 }

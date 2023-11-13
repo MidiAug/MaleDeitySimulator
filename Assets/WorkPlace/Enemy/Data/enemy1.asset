@@ -15,7 +15,7 @@ MonoBehaviour:
   enemySprite: {fileID: -140220566, guid: 162b270548dbe7f4f89dfe092c1a9c94, type: 3}
   Name: hyr
   race: dog
-  maxHp: 100
+  maxHp: 250
   moveSpeed: 5
   enemyInfo: "\u81ED\u50BB\u903C"
   enemyPrefab: {fileID: 9000118276211687339, guid: ee484be68e63ce840ae1772809913e1f, type: 3}

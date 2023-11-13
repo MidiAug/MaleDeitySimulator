@@ -5,7 +5,14 @@ using UnityEngine;
 
 public class TrapController : MonoBehaviour
 {
+    // 引用
     PlayerController player;
+
+    // 组件
+
+    // 属性
+    public float damage;
+
     // Start is called before the first frame update
     private void Start()
     {
@@ -16,7 +23,7 @@ public class TrapController : MonoBehaviour
         
         if (collision.gameObject.CompareTag( "Player")&&collision.GetType().ToString() == "UnityEngine.CapsuleCollider2D")
         {
-            player.Attacked(30);
+            player.Attacked(damage);
         }
     }
 

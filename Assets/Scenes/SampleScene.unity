@@ -1386,7 +1386,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 5
-  hp: 100
+  maxHp: 100
+  curHp: 0
   NumBlink: 2
   BlinkTime: 0.1
   dieTime: 2
@@ -27689,6 +27690,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f801afee6e87e64bb374f79617b5c96, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  damage: 10
 --- !u!50 &1212589202
 Rigidbody2D:
   serializedVersion: 4
