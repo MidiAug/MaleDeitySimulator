@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 74ddb53c6a9d96e47b2f0e424e0f4e38, type: 3}
+  m_Name: enemy2
+  m_EditorClassIdentifier: 
+  enemySprite: {fileID: 86454189, guid: b00178c47d9a8034ea2926883614e5b2, type: 3}
+  Name: lcq
+  race: dog
+  maxHp: 150
+  moveSpeed: 3
+  enemyInfo: "\u8111\u6B8Blcq"
+  enemyPrefab: {fileID: 0}
