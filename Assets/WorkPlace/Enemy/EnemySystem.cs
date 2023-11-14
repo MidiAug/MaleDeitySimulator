@@ -10,38 +10,49 @@ public class EnemySystem : MonoBehaviour
     GameObject enemy;
 
     // 属性
-    public float enemyInterval = 3f;//敌人生成间隔时间
-
+    public float enemyInterval = 3f;    //敌人生成间隔时间
+    public float enemyPossibility = 0.7f;  //生成第二类敌人概率
     private void Awake()
     {
         enemyList = Resources.Load<EnemyList>(typeof(EnemyList).Name);
-        if (enemyList != null)
+        enemy = GameObject.Find("Enemy");  // 在 Awake 中找到 enemy 对象
+
+        if (enemyList != null && enemyList.list != null)
         {
-            enemyData = enemyList.list[0];
+            if (RandomJudges.RandomJudge(enemyPossibility))
+            {
+                enemyData = enemyList.list[1];
+                Debug.Log("Selected Enemy Type: 1");
+            }
+            else
+            {
+                enemyData = enemyList.list[0];
+                Debug.Log("Selected Enemy Type: 0");
+            }
         }
     }
 
-    // 在Start方法中生成敌人
     private void Start()
     {
-        enemy = GameObject.Find("Enemy");
-        // 开始重复调用GenerateEnemy方法，每隔enemyInterval秒生成一个敌人
-        // TODO:目前只考虑了一种敌人类型，之后敌人类型多起来之后还需要修改这里的生成敌人方法
-        InvokeRepeating("GenerateEnemy", 0f, enemyInterval);
-
+        // 不再使用 GameObject.Find("Enemy")
+        // 在 Awake 方法中已经赋值给 enemy 变量
+        InvokeRepeating(nameof(GenerateEnemy), 0f, enemyInterval);
     }
 
-    // 生成敌人的方法
     private void GenerateEnemy()
     {
-        if (enemyData != null)
+        if (enemyData != null && enemy != null)
         {
-            // 在屏幕外的随机位置生成敌人
-            // TODO:当角色移动到地图边缘附近时，会出现敌人生成在墙外的情况，需要等地图系统完善修改
             Vector2 randomSpawnPosition = GetRandomSpawnPositionOutsideScreen();
-            Instantiate(enemyData.enemyPrefab, randomSpawnPosition, Quaternion.identity, enemy.transform);
+            Vector3 worldSpawnPosition = Camera.main.ScreenToWorldPoint(randomSpawnPosition);
+
+            Debug.Log($"Spawn Position: {worldSpawnPosition}");
+
+            Instantiate(enemyData.enemyPrefab, worldSpawnPosition, Quaternion.identity, enemy.transform);
         }
     }
+
+
 
     // 获取屏幕外的随机生成位置
     private Vector2 GetRandomSpawnPositionOutsideScreen()
