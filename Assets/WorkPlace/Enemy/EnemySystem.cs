@@ -9,8 +9,8 @@ public class EnemySystem : MonoBehaviour
     // 组件及对象
     GameObject enemy;
 
-    // 敌人生成间隔时间
-    public float enemyInterval = 3f;
+    // 属性
+    public float enemyInterval = 3f;//敌人生成间隔时间
 
     private void Awake()
     {
