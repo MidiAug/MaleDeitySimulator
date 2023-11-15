@@ -15,38 +15,38 @@ public class EnemySystem : MonoBehaviour
     private void Awake()
     {
         enemyList = Resources.Load<EnemyList>(typeof(EnemyList).Name);
-        enemy = GameObject.Find("Enemy");  // 在 Awake 中找到 enemy 对象
 
-        if (enemyList != null && enemyList.list != null)
-        {
-            if (RandomJudges.RandomJudge(enemyPossibility))
-            {
-                enemyData = enemyList.list[1];
-                Debug.Log("Selected Enemy Type: 1");
-            }
-            else
-            {
-                enemyData = enemyList.list[0];
-                Debug.Log("Selected Enemy Type: 0");
-            }
-        }
     }
 
     private void Start()
     {
         // 不再使用 GameObject.Find("Enemy")
-        // 在 Awake 方法中已经赋值给 enemy 变量
+        enemy = GameObject.Find("Enemy");  // 找到 enemy 对象
         InvokeRepeating(nameof(GenerateEnemy), 0f, enemyInterval);
     }
 
     private void GenerateEnemy()
     {
+        if (enemyList != null && enemyList.list != null)
+        {
+            if (RandomJudges.RandomJudge(enemyPossibility))
+            {
+                enemyData = enemyList.list[1];
+                //Debug.Log("Selected Enemy Type: 1");
+            }
+            else
+            {
+                enemyData = enemyList.list[0];
+                //Debug.Log("Selected Enemy Type: 0");
+            }
+        }
+
         if (enemyData != null && enemy != null)
         {
             Vector2 randomSpawnPosition = GetRandomSpawnPositionOutsideScreen();
             Vector3 worldSpawnPosition = Camera.main.ScreenToWorldPoint(randomSpawnPosition);
 
-            Debug.Log($"Spawn Position: {worldSpawnPosition}");
+            //Debug.Log($"Spawn Position: {worldSpawnPosition}");
 
             Instantiate(enemyData.enemyPrefab, worldSpawnPosition, Quaternion.identity, enemy.transform);
         }

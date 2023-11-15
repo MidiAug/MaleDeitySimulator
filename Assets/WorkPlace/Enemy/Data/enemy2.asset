@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 74ddb53c6a9d96e47b2f0e424e0f4e38, type: 3}
   m_Name: enemy2
   m_EditorClassIdentifier: 
-  enemySprite: {fileID: 86454189, guid: b00178c47d9a8034ea2926883614e5b2, type: 3}
+  enemySprite: {fileID: 2078964560, guid: 4104ee12b4d54f54b91b3ba875787837, type: 3}
   Name: lcq
   race: dog
   maxHp: 150
-  moveSpeed: 3
+  moveSpeed: 2
   enemyInfo: "\u8111\u6B8Blcq"
-  enemyPrefab: {fileID: 0}
+  enemyPrefab: {fileID: 1259736965834432201, guid: 796b30b7f8c480b4cb6ae458d3afc9ad, type: 3}

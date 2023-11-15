@@ -56,8 +56,9 @@ public class PlayerController : MonoBehaviour
         ani.SetBool("Idle", playerIdle);
 
         Vector2 dir = new Vector2(horizontal, vertical);
-        if (horizontal * vertical != 0) rbody.velocity = dir * 5f * (float)System.Math.Sqrt(0.5f);//斜着走速度*根号2
-        else rbody.velocity = dir * 5f;
+        if (horizontal * vertical != 0) rbody.velocity = dir * moveSpeed * (float)System.Math.Sqrt(0.5f);//斜着走速度*根号2
+        else rbody.velocity = dir * moveSpeed;
+        Debug.Log(rbody.velocity.magnitude);
     }
 
     // 受到攻击

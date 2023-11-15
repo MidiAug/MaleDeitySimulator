@@ -42,7 +42,7 @@ public class EnemyController : MonoBehaviour
 
     private void Update()
     {
-        if (!die&&!player.GetComponent<PlayerController>().die)
+        if (!die&&player!=null&&!player.GetComponent<PlayerController>().die)
         {
             Move();
             rigidbody2.velocity = Vector2.zero;
@@ -61,6 +61,8 @@ public class EnemyController : MonoBehaviour
         {
             //获取一个指向玩家的向量
             transform.position = Vector2.MoveTowards(transform.position, player.transform.position, enemyData.moveSpeed * Time.deltaTime);
+            
+            // 根据玩家与敌人的x轴坐标，翻转图像
             if (transform.position.x > player.transform.position.x)
             {
                 Flip(true);

@@ -99,8 +99,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weaponData: {fileID: 11400000, guid: 2851fb74c1dd2ab44a5a3c194ae65247, type: 2}
-  timer: 0
   bullet: {fileID: 1819653949089290251, guid: 990ab595695241547a0badfa78b89b29, type: 3}
+  timer: 0
   gunForce: 0
 --- !u!1 &8452399357684820391
 GameObject:
