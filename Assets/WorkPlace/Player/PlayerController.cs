@@ -18,6 +18,8 @@ public class PlayerController : MonoBehaviour
     public bool die = false;
     private bool isInvincible;//判断是否无敌，用于限制角色掉血方法调用间隔过短
 
+    public float MyMaxHealth { get { return maxHp; } }
+    public float MyCurrentHealth { get { return curHp; } }
     public int numBlink;
     public float blinkTime;
     public float dieTime;
@@ -85,6 +87,12 @@ public class PlayerController : MonoBehaviour
                 BlinkPlayer(numBlink, blinkTime);
             }
         }
+    }
+
+    //改变玩家生命值
+    public void ChangeHealth(float amount)
+    {
+        curHp += Mathf.Clamp(curHp+amount,0,maxHp);
     }
 
     // 销毁人物对象
