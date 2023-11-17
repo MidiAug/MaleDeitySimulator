@@ -438,6 +438,9 @@ MonoBehaviour:
   enemyData: {fileID: 11400000, guid: 1c94aea4db4c3fd49a3e65e5cdd64c0e, type: 2}
   curHp: 0
   desTime: 0
+  obj:
+  - {fileID: 8820839241257077207, guid: 3943b1e4a84a11e4591b31a1f842854f, type: 3}
+  - {fileID: 4698090169347634054, guid: da018742fbbab9042b761508736916a5, type: 3}
 --- !u!1 &3184882375257251976
 GameObject:
   m_ObjectHideFlags: 0

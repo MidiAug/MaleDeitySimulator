@@ -34,5 +34,11 @@ public class BulletController : MonoBehaviour
             collision.gameObject.GetComponent<EnemyController>().Attacked(damage);
             Destroy(gameObject, fadeTime);
         }
+
+        //»÷ÖÐÏä×Ó
+        if (collision.gameObject.tag == "box")
+        {
+            collision.GetComponent<Box>().GetCoin();
+        }
     }
 }

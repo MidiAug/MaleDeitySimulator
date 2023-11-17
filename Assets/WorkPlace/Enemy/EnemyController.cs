@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using static UnityEditor.PlayerSettings;
 
 public class EnemyController : MonoBehaviour
 {
@@ -23,6 +24,7 @@ public class EnemyController : MonoBehaviour
     public float curHp;
     public float desTime;
     private bool die = false;
+    public GameObject[] obj;
 
     /// <summary>
     /// EnemyController的相关方法
@@ -107,6 +109,9 @@ public class EnemyController : MonoBehaviour
             Invoke("DestorySelf", 1f);
             Destroy(gameObject.GetComponent<BoxCollider2D>());
             Destroy(gameObject.GetComponent<CapsuleCollider2D>());
+            //生成宝箱或补血道具
+            Vector3 pos1 = transform.position;
+            Instantiate(obj[Random.Range(0, obj.Length)], pos1, Quaternion.identity);
         }
     }
 
