@@ -29342,22 +29342,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: enemy2
       objectReference: {fileID: 0}
-    - target: {fileID: 1305604361926448741, guid: 796b30b7f8c480b4cb6ae458d3afc9ad, type: 3}
-      propertyPath: obj.Array.size
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 1305604361926448741, guid: 796b30b7f8c480b4cb6ae458d3afc9ad, type: 3}
-      propertyPath: obj.Array.data[0]
-      value: 
-      objectReference: {fileID: 314605090}
-    - target: {fileID: 1305604361926448741, guid: 796b30b7f8c480b4cb6ae458d3afc9ad, type: 3}
-      propertyPath: obj.Array.data[1]
-      value: 
-      objectReference: {fileID: 1353511649}
-    - target: {fileID: 4404409370958925952, guid: 796b30b7f8c480b4cb6ae458d3afc9ad, type: 3}
-      propertyPath: m_FlipX
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 6099093499041977653, guid: 796b30b7f8c480b4cb6ae458d3afc9ad, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0

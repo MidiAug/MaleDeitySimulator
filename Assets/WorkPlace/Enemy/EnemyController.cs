@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
-using static UnityEditor.PlayerSettings;
 
 public class EnemyController : MonoBehaviour
 {
@@ -17,6 +16,8 @@ public class EnemyController : MonoBehaviour
     private Rigidbody2D rigidbody2;
     private BoxCollider2D boxCollider2;
     private SpriteRenderer spriteRenderer2;
+    public GameObject arrowPrefab; // 箭矢预制体
+    public Transform firePoint; // 发射点（箭矢生成位置）
 
     private GameObject player;
 
@@ -24,7 +25,8 @@ public class EnemyController : MonoBehaviour
     public float curHp;
     public float desTime;
     private bool die = false;
-    public GameObject[] obj;
+    private float shootInterval = 2f;
+    private float shootTimer = 0f;
 
     /// <summary>
     /// EnemyController的相关方法
@@ -37,6 +39,7 @@ public class EnemyController : MonoBehaviour
         boxCollider2 = GetComponent<BoxCollider2D>();
         spriteRenderer2 = GetComponent<SpriteRenderer>();
         player = GameObject.FindGameObjectWithTag("Player");
+        firePoint = transform;
 
         // 数据初始化
         curHp = enemyData.maxHp;
@@ -44,16 +47,30 @@ public class EnemyController : MonoBehaviour
 
     private void Update()
     {
+        shootTimer += Time.deltaTime;
         if (!die&&player!=null&&!player.GetComponent<PlayerController>().die)
         {
             Move();
             rigidbody2.velocity = Vector2.zero;
+            //远程敌人还要射击
+            if (enemyData.Name == "lcq"&&shootTimer>=shootInterval)
+            {
+                // 创建箭矢并设置方向
+                Shoot();
+                shootTimer = 0;
+            }
         }//敌人没死并且玩家没死，调用移动函数
         else
         {
             animator.SetBool("Idle", true);
             animator.SetBool("Run", false);
         }
+    }
+
+    private void Shoot()
+    {
+        GameObject arrow = Instantiate(arrowPrefab, firePoint.position, new Quaternion(0,0,0,1));
+        
     }
 
     // 追踪玩家
@@ -109,9 +126,6 @@ public class EnemyController : MonoBehaviour
             Invoke("DestorySelf", 1f);
             Destroy(gameObject.GetComponent<BoxCollider2D>());
             Destroy(gameObject.GetComponent<CapsuleCollider2D>());
-            //生成宝箱或补血道具
-            Vector3 pos1 = transform.position;
-            Instantiate(obj[Random.Range(0, obj.Length)], pos1, Quaternion.identity);
         }
     }
 

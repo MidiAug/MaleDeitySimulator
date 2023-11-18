@@ -241,6 +241,7 @@ Transform:
   m_Children:
   - {fileID: 7277268454948490535}
   - {fileID: 5157376025407680794}
+  - {fileID: 1506278076983221955}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &4404409370958925952
@@ -286,7 +287,7 @@ SpriteRenderer:
   m_SortingOrder: 0
   m_Sprite: {fileID: 2078964560, guid: b00178c47d9a8034ea2926883614e5b2, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_FlipX: 0
+  m_FlipX: 1
   m_FlipY: 0
   m_DrawMode: 0
   m_Size: {x: 1, y: 1}
@@ -436,11 +437,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyData: {fileID: 11400000, guid: 1c94aea4db4c3fd49a3e65e5cdd64c0e, type: 2}
+  arrowPrefab: {fileID: 4291568730139008319, guid: 07bd84d02daff0e469cd03cbcc8093de, type: 3}
+  firePoint: {fileID: 1506278076983221955}
   curHp: 0
   desTime: 0
-  obj:
-  - {fileID: 8820839241257077207, guid: 3943b1e4a84a11e4591b31a1f842854f, type: 3}
-  - {fileID: 4698090169347634054, guid: da018742fbbab9042b761508736916a5, type: 3}
 --- !u!1 &3184882375257251976
 GameObject:
   m_ObjectHideFlags: 0
@@ -516,6 +516,37 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!1 &5641670460383602452
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1506278076983221955}
+  m_Layer: 0
+  m_Name: FirePoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1506278076983221955
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5641670460383602452}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7742617413573583777}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7089317612669609024
 GameObject:
   m_ObjectHideFlags: 0
