@@ -8,6 +8,7 @@ TagManager:
   - Build
   - Weapon
   - box
+  - Bullet
   layers:
   - Default
   - TransparentFX

@@ -11,20 +11,21 @@ public class EnemyController : MonoBehaviour
     // 引用EnemyData
     public EnemyData enemyData;
 
-    // 组件，前四者为敌人本身的组件，后者为玩家，便于追踪玩家位置
+    // 组件，前者为敌人本身的组件，后者为玩家，便于追踪玩家位置
     private Animator animator;
     private Rigidbody2D rigidbody2;
     private BoxCollider2D boxCollider2;
     private SpriteRenderer spriteRenderer2;
     public GameObject arrowPrefab; // 箭矢预制体
-    public Transform firePoint; // 发射点（箭矢生成位置）
+    private Transform firePoint; // 发射点（箭矢生成位置）
 
+    private GameObject enemySystem;
     private GameObject player;
 
     // 相关变量，当前生命值，角色死亡后消失时间，生存状态
     public float curHp;
     public float desTime;
-    private bool die = false;
+    public bool die = false;
     private float shootInterval = 2f;
     private float shootTimer = 0f;
 
@@ -38,7 +39,10 @@ public class EnemyController : MonoBehaviour
         rigidbody2 = GetComponent<Rigidbody2D>();
         boxCollider2 = GetComponent<BoxCollider2D>();
         spriteRenderer2 = GetComponent<SpriteRenderer>();
+
+        enemySystem = GameObject.Find("EnemySystem");        
         player = GameObject.FindGameObjectWithTag("Player");
+
         firePoint = transform;
 
         // 数据初始化
@@ -52,7 +56,7 @@ public class EnemyController : MonoBehaviour
         {
             Move();
             rigidbody2.velocity = Vector2.zero;
-            //远程敌人还要射击
+            //远程敌人还要射击   !!!!!!!!!!!!!!!!!!!!!!!!!bug
             if (enemyData.Name == "lcq"&&shootTimer>=shootInterval)
             {
                 // 创建箭矢并设置方向
@@ -69,8 +73,7 @@ public class EnemyController : MonoBehaviour
 
     private void Shoot()
     {
-        GameObject arrow = Instantiate(arrowPrefab, firePoint.position, new Quaternion(0,0,0,1));
-        
+        GameObject arrow = Instantiate(arrowPrefab, firePoint.position, new Quaternion(0,0,0,1),enemySystem.transform.GetChild(1));
     }
 
     // 追踪玩家

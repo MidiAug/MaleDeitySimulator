@@ -10,7 +10,7 @@ public class VisitWeapon : MonoBehaviour
     private Rigidbody2D bulletRigidBody; // 子弹的刚体
     private Transform bulletPos; // 子弹生成位置
 
-    private GameObject bulletObject;//实例化后，子弹属于WeaponSystem下Bullet的子物体方便管理
+    private GameObject weaponSystem;//实例化后，子弹属于WeaponSystem下Bullet的子物体方便管理
 
     // 相关属性
     public float timer = 0; // 计时器，用于控制射击间隔
@@ -19,7 +19,7 @@ public class VisitWeapon : MonoBehaviour
 
     void Start()
     {
-        bulletObject = GameObject.Find("Bullet");
+        weaponSystem = GameObject.Find("WeaponSystem");
 
         bulletPos = transform.GetChild(0); // 获取子弹生成位置，后期视武器下子对象是否修改
     }
@@ -57,7 +57,7 @@ public class VisitWeapon : MonoBehaviour
     {
         //用欧拉数以表示旋转
         Quaternion rotationOffset = Quaternion.AngleAxis(270, Vector3.forward); // 调整子弹旋转方向，使其向上
-        GameObject newBullet = Instantiate(bullet, bulletPos.position, this.gameObject.transform.rotation * rotationOffset,bulletObject.transform); // 生成子弹
+        GameObject newBullet = Instantiate(bullet, bulletPos.position, this.gameObject.transform.rotation * rotationOffset,weaponSystem.transform.GetChild(0)); // 生成子弹
 
         bulletRigidBody = newBullet.gameObject.GetComponent<Rigidbody2D>(); // 获取子弹的刚体组件
         gunForce = 10f; // 设置发射子弹的力，以便实现射击效果

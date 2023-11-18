@@ -15,7 +15,7 @@ MonoBehaviour:
   enemySprite: {fileID: 2078964560, guid: 4104ee12b4d54f54b91b3ba875787837, type: 3}
   Name: lcq
   race: dog
-  maxHp: 150
-  moveSpeed: 2
+  maxHp: 1000
+  moveSpeed: 0.5
   enemyInfo: "\u8111\u6B8Blcq"
   enemyPrefab: {fileID: 1259736965834432201, guid: 796b30b7f8c480b4cb6ae458d3afc9ad, type: 3}

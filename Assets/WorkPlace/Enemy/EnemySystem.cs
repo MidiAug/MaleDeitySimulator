@@ -7,7 +7,7 @@ public class EnemySystem : MonoBehaviour
     EnemyList enemyList;
 
     // 组件及对象
-    GameObject enemy;
+    GameObject enemySystem;
 
     // 属性
     public float enemyInterval = 3f;    //敌人生成间隔时间
@@ -21,8 +21,8 @@ public class EnemySystem : MonoBehaviour
     private void Start()
     {
         // 不再使用 GameObject.Find("Enemy")
-        enemy = GameObject.Find("Enemy");  // 找到 enemy 对象
-        InvokeRepeating(nameof(GenerateEnemy), 0f, enemyInterval);
+        enemySystem = GameObject.Find("EnemySystem");  // 找到 EnemySystem 对象
+        InvokeRepeating(nameof(GenerateEnemy), 2f, enemyInterval);
     }
 
     private void GenerateEnemy()
@@ -41,14 +41,15 @@ public class EnemySystem : MonoBehaviour
             }
         }
 
-        if (enemyData != null && enemy != null)
+        if (enemyData != null)
         {
             Vector2 randomSpawnPosition = GetRandomSpawnPositionOutsideScreen();
-            Vector3 worldSpawnPosition = Camera.main.ScreenToWorldPoint(randomSpawnPosition);
+            // 使用worldSpawnPosition怪物始终左下角生成
+            // Vector3 worldSpawnPosition = Camera.main.ScreenToWorldPoint(randomSpawnPosition);
 
             //Debug.Log($"Spawn Position: {worldSpawnPosition}");
 
-            Instantiate(enemyData.enemyPrefab, worldSpawnPosition, Quaternion.identity, enemy.transform);
+            Instantiate(enemyData.enemyPrefab, randomSpawnPosition, Quaternion.identity, enemySystem.transform.GetChild(0));
         }
     }
 
@@ -64,7 +65,6 @@ public class EnemySystem : MonoBehaviour
         Vector2 randomSpawnPosition = new Vector2();
 
         float randomSide = Random.Range(0, 4);
-
         switch (randomSide)
         {
             case 0: // 上侧

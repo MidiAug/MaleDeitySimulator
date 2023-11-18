@@ -30,9 +30,13 @@ public class BulletController : MonoBehaviour
         // 击中敌人
         if (collision.gameObject.tag == "Enemy")
         {
+            EnemyController enemyController = collision.gameObject.GetComponent<EnemyController>();
             // 获取碰撞物体上的 EnemyController 组件，并调用其 Attacked 方法，传递伤害值
-            collision.gameObject.GetComponent<EnemyController>().Attacked(damage);
-            Destroy(gameObject, fadeTime);
+            if (enemyController.die ==  false)
+            {
+                enemyController.Attacked(damage);
+                Destroy(gameObject, fadeTime);
+            }
         }
 
         //击中箱子
