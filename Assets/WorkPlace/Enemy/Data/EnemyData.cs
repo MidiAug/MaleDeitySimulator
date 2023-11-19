@@ -7,7 +7,7 @@ using UnityEngine;
 /// </summary>
 
 //此行在资源的创建选项中创建了一个新的选项Enemy,在创建时文件自动命名为NewEnemy
-[CreateAssetMenu(menuName = "ScriptableObject/Enemy", fileName = "NewEnemy")]
+[CreateAssetMenu(menuName = "ScriptableObject/Enemy", fileName = "newEnemy")]
 
 //派生自ScriptableObject
 public class EnemyData : ScriptableObject
@@ -21,7 +21,9 @@ public class EnemyData : ScriptableObject
     public string race;
     public float maxHp;
     public float moveSpeed;
+    public float boxPossibility;
     [TextArea] public string enemyInfo;
 
     public GameObject enemyPrefab;
+    public GameObject boxPrefab;
 }

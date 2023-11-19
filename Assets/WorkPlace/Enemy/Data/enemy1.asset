@@ -17,5 +17,7 @@ MonoBehaviour:
   race: dog
   maxHp: 250
   moveSpeed: 2
+  boxPossibility: 0.5
   enemyInfo: "\u81ED\u50BB\u903C"
   enemyPrefab: {fileID: 9000118276211687339, guid: ee484be68e63ce840ae1772809913e1f, type: 3}
+  boxPrefab: {fileID: 8820839241257077207, guid: 3943b1e4a84a11e4591b31a1f842854f, type: 3}

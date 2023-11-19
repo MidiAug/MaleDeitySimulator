@@ -89,10 +89,10 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    //改变玩家生命值
-    public void ChangeHealth(float amount)
+    //增加玩家生命值
+    public void InHealth(float val)
     {
-        curHp += Mathf.Clamp(curHp+amount,0,maxHp);
+        curHp = Mathf.Clamp(curHp + val, 0 , maxHp);
     }
 
     // 销毁人物对象

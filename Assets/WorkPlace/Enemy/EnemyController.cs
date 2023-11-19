@@ -16,6 +16,7 @@ public class EnemyController : MonoBehaviour
     private Rigidbody2D rigidbody2;
     private BoxCollider2D boxCollider2;
     private SpriteRenderer spriteRenderer2;
+
     public GameObject arrowPrefab; // 箭矢预制体
     private Transform firePoint; // 发射点（箭矢生成位置）
 
@@ -52,18 +53,15 @@ public class EnemyController : MonoBehaviour
     private void Update()
     {
         shootTimer += Time.deltaTime;
+        //敌人没死并且玩家没死，则进行活动
         if (!die&&player!=null&&!player.GetComponent<PlayerController>().die)
         {
             Move();
-            rigidbody2.velocity = Vector2.zero;
-            //远程敌人还要射击   !!!!!!!!!!!!!!!!!!!!!!!!!bug
-            if (enemyData.Name == "lcq"&&shootTimer>=shootInterval)
-            {
-                // 创建箭矢并设置方向
-                Shoot();
-                shootTimer = 0;
-            }
-        }//敌人没死并且玩家没死，调用移动函数
+            rigidbody2.velocity = Vector2.zero;// 避免人物与敌人碰撞，敌人移动方法是无速度的
+
+            //远程敌人要射击
+            if (enemyData.Name == "lcq"&&shootTimer>=shootInterval) Shoot();
+        }
         else
         {
             animator.SetBool("Idle", true);
@@ -73,7 +71,9 @@ public class EnemyController : MonoBehaviour
 
     private void Shoot()
     {
-        GameObject arrow = Instantiate(arrowPrefab, firePoint.position, new Quaternion(0,0,0,1),enemySystem.transform.GetChild(1));
+        // 创建箭矢并设置方向
+        GameObject arrow = Instantiate(arrowPrefab, firePoint.position, new Quaternion(0, 0, 0, 1), enemySystem.transform.GetChild(1));
+        shootTimer = 0;
     }
 
     // 追踪玩家
@@ -115,7 +115,7 @@ public class EnemyController : MonoBehaviour
     public void Attacked(float damage)
     {
         curHp -= damage;
-        //浮点数判断小于0
+        //浮点数判断小于0，敌人死亡
         if (curHp < Mathf.Epsilon) 
         {
             animator.SetTrigger("Die");
@@ -125,10 +125,15 @@ public class EnemyController : MonoBehaviour
                 //遍历所有子物体并销毁
                 Destroy(transform.GetChild(i).gameObject);
             }
-            //Invoke是延时调用方法，在一秒后调用DestorySelf方法(Destory拼错了)
+            // 保留怪物遗体一部分时间
             Invoke("DestorySelf", 1f);
+
+            // 使尸体无法与玩家交互
             Destroy(gameObject.GetComponent<BoxCollider2D>());
             Destroy(gameObject.GetComponent<CapsuleCollider2D>());
+
+            // 生成宝箱
+            BoxGenerate();
         }
     }
 
@@ -143,4 +148,14 @@ public class EnemyController : MonoBehaviour
     {
         spriteRenderer2.flipX = isOrNot;
     }
+
+    void BoxGenerate()
+    {
+        //Instantiate(obj[Random.Range(0, obj.Length)], pos1, Quaternion.identity);
+        if(Random.value < enemyData.boxPossibility)
+        {
+            Instantiate(enemyData.boxPrefab, transform.position, Quaternion.identity);
+        }
+    }
+
 }

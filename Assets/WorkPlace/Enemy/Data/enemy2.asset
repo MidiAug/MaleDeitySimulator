@@ -16,6 +16,8 @@ MonoBehaviour:
   Name: lcq
   race: dog
   maxHp: 1000
-  moveSpeed: 0.5
+  moveSpeed: 1.5
+  boxPossibility: 0.5
   enemyInfo: "\u8111\u6B8Blcq"
   enemyPrefab: {fileID: 1259736965834432201, guid: 796b30b7f8c480b4cb6ae458d3afc9ad, type: 3}
+  boxPrefab: {fileID: 8820839241257077207, guid: 3943b1e4a84a11e4591b31a1f842854f, type: 3}

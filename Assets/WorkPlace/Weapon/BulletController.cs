@@ -38,11 +38,5 @@ public class BulletController : MonoBehaviour
                 Destroy(gameObject, fadeTime);
             }
         }
-
-        //»÷ÖÐÏä×Ó
-        if (collision.gameObject.tag == "box")
-        {
-            collision.GetComponent<Box>().GetCoin();
-        }
     }
 }
