@@ -65,6 +65,7 @@ public class PropController : MonoBehaviour
     {
         // Ê°È¡½ð±Ò
         //pickUpAnimation.Play(target);
+        Debug.Log(propData.val);
         coinNum += (int)propData.val;
         GameObject.Find("Coin").transform.GetChild(1).GetComponent<Text>().text = coinNum.ToString();
         Destroy(gameObject);
