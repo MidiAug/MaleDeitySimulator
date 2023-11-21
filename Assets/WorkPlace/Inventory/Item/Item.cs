@@ -5,11 +5,6 @@ using UnityEngine;
 [System.Serializable]
 public class Item
 {
-    //PropList propList;
-    //void Awake()
-   // {
-    //    propList = Resources.Load<PropList>(typeof(PropList).Name);
-   // }
     public enum ItemType
     {
         goldCoin,//金币
@@ -19,4 +14,17 @@ public class Item
     }
     public string Itemname;
     public int Itemamount;
+    public ItemType itemType;
+    //获取当前物品的图片
+    public Sprite Getitemsprite()
+    {
+        switch (itemType)
+        {
+            default:
+            case Item.ItemType.copperCoin:return (Itemassets.Instance.Coopercoinprite);
+            case Item.ItemType.goldCoin: return (Itemassets.Instance.Goldcoinsprite);
+            case Item.ItemType.silverCoin: return (Itemassets.Instance.slivercoinprite);
+            case Item.ItemType.bloodpacks: return (Itemassets.Instance.Bloodpacksprite);
+        }
+    }
 }
