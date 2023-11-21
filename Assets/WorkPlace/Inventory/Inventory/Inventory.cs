@@ -4,11 +4,22 @@ using UnityEngine;
 
 public class Inventory
 {
-    private List<Item> ItemList;
+    private List<Item> itemList;
+    public Inventory()
+    {
+        itemList = new List<Item>();
+    }
+
+    //添加物品
+    public void Additem(Item item)
+    {
+        itemList.Add(item);
+    }
+
     //获取物品列表
     public List<Item> GetItemList()
     {
-        return ItemList;
+        return itemList;
     }
 
 

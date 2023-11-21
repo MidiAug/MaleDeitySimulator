@@ -5,11 +5,11 @@ using UnityEngine;
 [System.Serializable]
 public class Item
 {
-    PropList propList;
-    void Awake()
-    {
-        propList = Resources.Load<PropList>(typeof(PropList).Name);
-    }
+    //PropList propList;
+    //void Awake()
+   // {
+    //    propList = Resources.Load<PropList>(typeof(PropList).Name);
+   // }
     public enum ItemType
     {
         goldCoin,//½ð±Ò
