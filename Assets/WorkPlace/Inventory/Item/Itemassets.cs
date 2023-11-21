@@ -13,4 +13,6 @@ public class Itemassets : MonoBehaviour
     public Sprite Bloodpacksprite;
     public Sprite Coopercoinprite;
     public Sprite slivercoinprite;
+
+    public GameObject DropitemPrefab;
 }

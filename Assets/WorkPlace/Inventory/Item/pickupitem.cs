@@ -7,7 +7,9 @@ public class pickupitem : MonoBehaviour
     private Inventory inventory;
     private void Awake()
     {
-        inventory = new Inventory();
+        Inventorymanager.Instance.SetPlayer(this.gameObject);
+        inventory = new Inventory();        
+
         //≤‚ ‘ÃÌº”ŒÔ∆∑
         inventory.Additem(new Item { itemType=Item.ItemType.goldCoin,Itemamount = 666, Itemname = "goldCoin" });
         inventory.Additem(new Item { itemType = Item.ItemType.copperCoin,Itemamount = 555, Itemname = "bloodpacks" });
@@ -16,6 +18,8 @@ public class pickupitem : MonoBehaviour
         Inventorymanager.Instance.Setplayerinventory(inventory);
     }
 
-    //
+    private void Start()
+    {
 
+    }
 }

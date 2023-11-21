@@ -15,6 +15,7 @@ public class Inventorymanager : MonoBehaviour
     //
     [SerializeField]private Transform slotpanel;
     [SerializeField]private GameObject slotprefab;
+    private GameObject player;
 
     //设置玩家背包
     public void Setplayerinventory(Inventory inventory)
@@ -22,7 +23,16 @@ public class Inventorymanager : MonoBehaviour
         playerinventory = inventory;
         Refreshinventoryui();
     }
-
+    //设置玩家
+    public void SetPlayer(GameObject player)
+    {
+        this.player = player;
+    }
+    //获取玩家
+    public GameObject Getplyer()
+    {
+        return this.player;
+    }
     //刷新背包
     public void Refreshinventoryui()
     {
@@ -39,6 +49,7 @@ public class Inventorymanager : MonoBehaviour
                 Item item = playerinventory.GetItemList()[i];
                 //生成slot
                 GameObject newslot = Instantiate(slotprefab, slotpanel);
+                newslot.GetComponent<Drop>().item=item;
                 //信息同步到item上
                 newslot.GetComponent<Image>().sprite = item.Getitemsprite();
                 if(item.Itemamount>1)
