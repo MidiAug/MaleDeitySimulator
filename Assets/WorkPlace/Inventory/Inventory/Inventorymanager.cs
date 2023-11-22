@@ -29,7 +29,7 @@ public class Inventorymanager : MonoBehaviour
         this.player = player;
     }
     //»ñÈ¡Íæ¼Ò
-    public GameObject Getplyer()
+    public GameObject Getplayer()
     {
         return this.player;
     }

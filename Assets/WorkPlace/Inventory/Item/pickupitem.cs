@@ -20,6 +20,6 @@ public class pickupitem : MonoBehaviour
 
     private void Start()
     {
-
+      
     }
 }
