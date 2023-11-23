@@ -11,7 +11,7 @@ public class EnemySystem : MonoBehaviour
 
     // 属性
     public float enemyInterval = 3f;    //敌人生成间隔时间
-    public float enemyPossibility = 0.7f;  //生成第二类敌人概率
+    public float[] enemyPossibility =new float[3] { 0.6f, 0.3f, 0.1f };//生成第一、二、三类敌人概率
     private void Awake()
     {
         enemyList = Resources.Load<EnemyList>(typeof(EnemyList).Name);
@@ -29,15 +29,18 @@ public class EnemySystem : MonoBehaviour
     {
         if (enemyList != null && enemyList.list != null)
         {
-            if (RandomJudges.RandomJudge(enemyPossibility))
+            if (RandomJudges.RandomJudge(0.4f))
             {
-                enemyData = enemyList.list[1];
-                //Debug.Log("Selected Enemy Type: 1");
+                enemyData = enemyList.list[0];
             }
             else
             {
-                enemyData = enemyList.list[0];
-                //Debug.Log("Selected Enemy Type: 0");
+                if(RandomJudges.RandomJudge(0.25f))
+                {
+                    enemyData = enemyList.list[1];
+                }
+                else
+                    enemyData= enemyList.list[2];
             }
         }
 
@@ -62,7 +65,7 @@ public class EnemySystem : MonoBehaviour
         float screenY = Screen.height;
 
         // 随机选择屏幕的边缘位置
-        Vector2 randomSpawnPosition = new Vector2();
+        Vector2 randomSpawnPosition = new();
 
         float randomSide = Random.Range(0, 4);
         switch (randomSide)

@@ -10,14 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 74ddb53c6a9d96e47b2f0e424e0f4e38, type: 3}
-  m_Name: enemy2
+  m_Name: enemy3
   m_EditorClassIdentifier: 
-  enemySprite: {fileID: 2078964560, guid: 4104ee12b4d54f54b91b3ba875787837, type: 3}
-  Name: lcq
+  enemySprite: {fileID: 172626504, guid: c4d2ccab0c2ad7e47853b6e31a7ac7c2, type: 3}
+  Name: lcq2
   race: dog
-  maxHp: 150
-  moveSpeed: 3
-  boxPossibility: 0.5
-  enemyInfo: "\u8111\u6B8Blcq"
-  enemyPrefab: {fileID: 1259736965834432201, guid: 796b30b7f8c480b4cb6ae458d3afc9ad, type: 3}
+  maxHp: 200
+  moveSpeed: 3.5
+  boxPossibility: 0.3
+  enemyInfo: beyond lcq
+  enemyPrefab: {fileID: 4324759842955055222, guid: c58e02f3449d3024a9a116677da942d1, type: 3}
   boxPrefab: {fileID: 8820839241257077207, guid: 3943b1e4a84a11e4591b31a1f842854f, type: 3}

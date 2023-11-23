@@ -172,6 +172,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 0}
-  arrowSpeed: 3
+  arrowSpeed: 5
   maxDistance: 10
   damage: 10
