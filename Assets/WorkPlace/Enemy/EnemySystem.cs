@@ -27,26 +27,30 @@ public class EnemySystem : MonoBehaviour
 
     private void GenerateEnemy()
     {
+        // 通过权重随机获取敌人类型
         if (enemyList != null && enemyList.list != null)
         {
-            if (RandomJudges.RandomJudge(0.4f))
+            float totalWeight = 0f;
+            foreach (EnemyData tmp in enemyList.list)
             {
-                enemyData = enemyList.list[0];
+                totalWeight += tmp.weight;
             }
-            else
+
+            float randomValue = Random.value * totalWeight;
+            foreach (EnemyData tmp in enemyList.list)
             {
-                if(RandomJudges.RandomJudge(0.25f))
+                randomValue -= tmp.weight;
+                if (randomValue <= 0f)
                 {
-                    enemyData = enemyList.list[1];
+                    enemyData = tmp;
+                    break;
                 }
-                else
-                    enemyData= enemyList.list[2];
             }
         }
 
         if (enemyData != null)
         {
-            Vector2 randomSpawnPosition = GetRandomSpawnPositionOutsideScreen();
+            Vector2 randomSpawnPosition = GetRandSpawnPosOutScreen();
             // 使用worldSpawnPosition怪物始终左下角生成
             // Vector3 worldSpawnPosition = Camera.main.ScreenToWorldPoint(randomSpawnPosition);
 
@@ -59,32 +63,32 @@ public class EnemySystem : MonoBehaviour
 
 
     // 获取屏幕外的随机生成位置
-    private Vector2 GetRandomSpawnPositionOutsideScreen()
+    private Vector2 GetRandSpawnPosOutScreen()
     {
         float screenX = Screen.width;
         float screenY = Screen.height;
 
         // 随机选择屏幕的边缘位置
-        Vector2 randomSpawnPosition = new();
+        Vector2 randSpawnPos = new();
 
         float randomSide = Random.Range(0, 4);
         switch (randomSide)
         {
             case 0: // 上侧
-                randomSpawnPosition = new Vector2(Random.Range(0, screenX), screenY + 1);
+                randSpawnPos = new Vector2(Random.Range(0, screenX), screenY + 1);
                 break;
             case 1: // 右侧
-                randomSpawnPosition = new Vector2(screenX + 1, Random.Range(0, screenY));
+                randSpawnPos = new Vector2(screenX + 1, Random.Range(0, screenY));
                 break;
             case 2: // 下侧
-                randomSpawnPosition = new Vector2(Random.Range(0, screenX), -1);
+                randSpawnPos = new Vector2(Random.Range(0, screenX), -1);
                 break;
             case 3: // 左侧
-                randomSpawnPosition = new Vector2(-1, Random.Range(0, screenY));
+                randSpawnPos = new Vector2(-1, Random.Range(0, screenY));
                 break;
         }
 
         // 将屏幕坐标转换为世界坐标
-        return Camera.main.ScreenToWorldPoint(randomSpawnPosition);
+        return Camera.main.ScreenToWorldPoint(randSpawnPos);
     }
 }

@@ -13,7 +13,6 @@ public class PropController : MonoBehaviour
     PlayerController playerController;
 
     private bool KeyCode_F;// F 键拾取
-    public int coinNum = 0;
     private GameObject tar;
     private RectTransform target;//指向要移动的目的
 
@@ -65,9 +64,8 @@ public class PropController : MonoBehaviour
     {
         // 拾取金币
         //pickUpAnimation.Play(target);
-        Debug.Log(propData.val);
-        coinNum += (int)propData.val;
-        GameObject.Find("Coin").transform.GetChild(1).GetComponent<Text>().text = coinNum.ToString();
+        playerController.coinNum += (int)propData.val;
+        GameObject.Find("Coin").transform.GetChild(1).GetComponent<Text>().text = playerController.coinNum.ToString();
         Destroy(gameObject);
     }
 }

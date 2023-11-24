@@ -29,6 +29,10 @@ public class EnemyController : MonoBehaviour
     public bool die = false;
     private float shootInterval = 2f;
     private float shootTimer = 0f;
+    private int blinkNum =2 ;
+    private float blinkTime = 0.2f;
+    bool isBlink;// 避免频繁收到伤害时多次协程闪烁同时开启
+
 
     /// <summary>
     /// EnemyController的相关方法
@@ -64,7 +68,7 @@ public class EnemyController : MonoBehaviour
         }
         else
         {
-            //animator.SetBool("Idle", true);
+            animator.SetBool("Idle", true);
             animator.SetBool("Run", false);
         }
     }
@@ -118,6 +122,8 @@ public class EnemyController : MonoBehaviour
         //浮点数判断小于0，敌人死亡
         if (curHp < Mathf.Epsilon) 
         {
+            spriteRenderer2.color = Color.white;
+            StopCoroutine("AttackedAni");
             animator.SetTrigger("Die");
             die = true;
             for (int i = 0; i < transform.childCount; i++)
@@ -135,7 +141,32 @@ public class EnemyController : MonoBehaviour
             // 生成宝箱
             BoxGenerate();
         }
+        else
+        {
+            if(!isBlink) StartCoroutine("AttackedAni");
+        }
     }
+
+    // 受攻击红色闪烁
+    IEnumerator AttackedAni()
+    {
+        isBlink = true;
+        // 循环执行闪烁的次数（每次循环切换显示和隐藏）
+        for (int i = 0; i < blinkNum; i++)
+        {
+            // 切换人物的渲染状态，实现显示和隐藏的效果
+            spriteRenderer2.color = Color.red;
+            // 等待指定的时间间隔
+            yield return new WaitForSeconds(blinkTime);
+            spriteRenderer2.color = Color.white;
+            yield return new WaitForSeconds(blinkTime);
+        }
+
+        // 循环结束后，确保敌人正常显示
+        spriteRenderer2.color = Color.white;
+        isBlink = false;
+    }
+    
 
     // 死亡消除对象
     private void DestorySelf()
@@ -149,6 +180,7 @@ public class EnemyController : MonoBehaviour
         spriteRenderer2.flipX = isOrNot;
     }
 
+    // 生成宝箱
     void BoxGenerate()
     {
         //Instantiate(obj[Random.Range(0, obj.Length)], pos1, Quaternion.identity);

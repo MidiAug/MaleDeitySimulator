@@ -15,9 +15,10 @@ MonoBehaviour:
   enemySprite: {fileID: 172626504, guid: c4d2ccab0c2ad7e47853b6e31a7ac7c2, type: 3}
   Name: lcq2
   race: dog
-  maxHp: 200
+  maxHp: 100
   moveSpeed: 3.5
   boxPossibility: 0.3
+  weight: 2
   enemyInfo: beyond lcq
   enemyPrefab: {fileID: 4324759842955055222, guid: c58e02f3449d3024a9a116677da942d1, type: 3}
   boxPrefab: {fileID: 8820839241257077207, guid: 3943b1e4a84a11e4591b31a1f842854f, type: 3}

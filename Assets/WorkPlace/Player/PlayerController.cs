@@ -22,7 +22,9 @@ public class PlayerController : MonoBehaviour
     public float MyCurrentHealth { get { return curHp; } }
     public int numBlink;
     public float blinkTime;
-    public float dieTime;
+    public float dieTime;// 死亡后多久消失
+
+    public int coinNum;// 暂时充当背包
 
     void Start()
     {
@@ -84,7 +86,7 @@ public class PlayerController : MonoBehaviour
             }
             if (!die)
             {
-                BlinkPlayer(numBlink, blinkTime);
+                StartCoroutine(BlinkPlayer(numBlink, blinkTime));
             }
         }
     }
@@ -92,6 +94,10 @@ public class PlayerController : MonoBehaviour
     //增加玩家生命值
     public void InHealth(float val)
     {
+        if(val<=0)
+        {
+            Debug.Log("错误，增加量小于0");
+        }
         curHp = Mathf.Clamp(curHp + val, 0 , maxHp);
     }
 
@@ -102,14 +108,8 @@ public class PlayerController : MonoBehaviour
     }
 
     // 人物收到攻击动画
-    private void BlinkPlayer(int num, float time)
-    {
-        // 启动协程，播放闪烁动画
-        StartCoroutine(DoBlinkPlayer(num, time));
-    }
-
     // 协程(IEnumerator)用于播放人物受到攻击时的闪烁动画
-    IEnumerator DoBlinkPlayer(int num, float time)
+    IEnumerator BlinkPlayer(int num, float time)
     {
         // 循环执行闪烁的次数（每次循环切换显示和隐藏）
         for (int i = 0; i < num * 2; i++)

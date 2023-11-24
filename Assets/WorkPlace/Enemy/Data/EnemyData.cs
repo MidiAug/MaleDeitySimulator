@@ -22,6 +22,7 @@ public class EnemyData : ScriptableObject
     public float maxHp;
     public float moveSpeed;
     public float boxPossibility;
+    public float weight;//生成的权重
     [TextArea] public string enemyInfo;
 
     public GameObject enemyPrefab;
