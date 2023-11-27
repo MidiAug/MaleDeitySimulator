@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Menu : MonoBehaviour
 {
@@ -32,5 +33,21 @@ public class Menu : MonoBehaviour
             Time.timeScale = (1);//时间恢复正常
             bgm.Play();//bgm播放
         }
+    }
+    public void Return()//返回游戏
+    {
+        menuList.SetActive(false);
+        menukey = true;
+        Time.timeScale = (1);//时间恢复正常
+        bgm.Play();//bgm播放
+    }
+    public void Restart()//重开
+    {
+        SceneManager.LoadScene(0);
+        Time.timeScale = 1;
+    }
+    public void Quit()//退出游戏
+    {
+        Application.Quit();
     }
 }
