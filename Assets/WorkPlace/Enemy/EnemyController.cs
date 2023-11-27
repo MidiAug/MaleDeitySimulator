@@ -29,7 +29,7 @@ public class EnemyController : MonoBehaviour
     public bool die = false;
     private float shootInterval = 2f;
     private float shootTimer = 0f;
-    private int blinkNum =2 ;
+    private int blinkNum =1 ;
     private float blinkTime = 0.2f;
     bool isBlink;// 避免频繁收到伤害时多次协程闪烁同时开启
 
@@ -140,6 +140,9 @@ public class EnemyController : MonoBehaviour
 
             // 生成宝箱
             BoxGenerate();
+
+            // 经验
+            player.GetComponent<PlayerController>().InExp(20);
         }
         else
         {

@@ -1,28 +1,35 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Xml.Linq;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
     // 组件
     private Animator ani;
     private Rigidbody2D rbody;
-    private Transform trans;
     private SpriteRenderer sRenderer;
+    private GameObject playerUI;
+    private Slider expSlider;
+    private Text levelText;
+    private Slider hpSlider;
 
     //人物相关属性
-    public float moveSpeed = 5f;
-    public float maxHp = 100;
-    public float curHp;
+    private float moveSpeed = 5f;
+    private float maxHp = 100;
+    private float curHp;
+    private float maxExp = 100;
+    private float curExp = 0;
+    public float curLevel =1;
+
     public bool die = false;
     private bool isInvincible;//判断是否无敌，用于限制角色掉血方法调用间隔过短
 
-    public float MyMaxHealth { get { return maxHp; } }
-    public float MyCurrentHealth { get { return curHp; } }
-    public int numBlink;
-    public float blinkTime;
-    public float dieTime;// 死亡后多久消失
+    private int numBlink = 2;
+    private float blinkTime = 0.2f;
+    private float dieTime = 2f;// 死亡后多久消失
 
     public int coinNum;// 暂时充当背包
 
@@ -31,10 +38,14 @@ public class PlayerController : MonoBehaviour
         // 获取组件，初始化角色血量
         ani = GetComponent<Animator>();
         rbody = GetComponent<Rigidbody2D>();
-        trans = GetComponent<Transform>();
         sRenderer = GetComponent<SpriteRenderer>();
 
+        playerUI = GameObject.Find("PlayerUI");
+        hpSlider = playerUI.transform.GetChild(0).gameObject.GetComponent<Slider>();
+        expSlider = playerUI.transform.GetChild(1).gameObject.GetComponent<Slider>();
+        levelText = playerUI.transform.GetChild(2).gameObject.GetComponent<Text>();
         curHp = maxHp;
+        curLevel = 1;
     }
 
     void Update()
@@ -42,6 +53,9 @@ public class PlayerController : MonoBehaviour
         if (!die)
         {
             Move();
+            // 更新条条
+            hpSlider.value = curHp / maxHp;
+            expSlider.value = curExp / maxExp;
         }
     }
 
@@ -126,5 +140,33 @@ public class PlayerController : MonoBehaviour
 
         // 表示角色可以接受下一次伤害
         isInvincible = false;
+    }
+
+    // 获得经验
+    public void InExp(float newExp)
+    {
+        curExp += newExp;
+        if(curExp>=maxExp)
+        {
+            InLevel();
+        }
+    }
+
+    // 等级提升
+    private void InLevel()
+    {
+        maxHp += 10;
+        curHp = maxHp;
+
+        curLevel++;
+        curExp = 0;
+        levelText.text = "lv." + curLevel.ToString();
+
+        maxExp += 60; // 具体值待定
+    }
+
+    IEnumerator InlevelAni(int time)
+    {
+        yield return new WaitForSeconds(time);
     }
 }
