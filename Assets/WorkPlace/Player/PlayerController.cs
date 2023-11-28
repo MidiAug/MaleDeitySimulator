@@ -23,6 +23,7 @@ public class PlayerController : MonoBehaviour
     private float maxExp = 100;
     private float curExp = 0;
     public float curLevel =1;
+    private Audio playerAudio;//玩家音效，目前包内只有射击、胜利、战败、升级的音效
 
     public bool die = false;
     private bool isInvincible;//判断是否无敌，用于限制角色掉血方法调用间隔过短
@@ -39,6 +40,7 @@ public class PlayerController : MonoBehaviour
         ani = GetComponent<Animator>();
         rbody = GetComponent<Rigidbody2D>();
         sRenderer = GetComponent<SpriteRenderer>();
+        playerAudio = GameObject.FindGameObjectWithTag("Audio").GetComponent<Audio>();
 
         playerUI = GameObject.Find("PlayerUI");
         hpSlider = playerUI.transform.GetChild(0).gameObject.GetComponent<Slider>();
@@ -85,9 +87,13 @@ public class PlayerController : MonoBehaviour
         {
             isInvincible = true;
             curHp -= damage;
+            
             if (curHp < Mathf.Epsilon)
             {
                 ani.SetTrigger("Die");
+                //失败音效
+                playerAudio.PlaySFX(playerAudio.lost);
+
                 for (int i = 0; i < transform.childCount; i++)
                 {
                     Destroy(transform.GetChild(i).gameObject);
@@ -161,6 +167,9 @@ public class PlayerController : MonoBehaviour
         curLevel++;
         curExp = 0;
         levelText.text = "lv." + curLevel.ToString();
+
+        //播放升级音效
+        playerAudio.PlaySFX(playerAudio.levelUp);
 
         maxExp += 60; // 具体值待定
     }

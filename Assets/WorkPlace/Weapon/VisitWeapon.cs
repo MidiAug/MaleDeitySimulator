@@ -11,6 +11,7 @@ public class VisitWeapon : MonoBehaviour
     private Transform bulletPos; // 子弹生成位置
 
     private GameObject weaponSystem;//实例化后，子弹属于WeaponSystem下Bullet的子物体方便管理
+    private Audio weaponSFX;//武器音效，目前只有射击
 
     // 相关属性
     public float timer = 0; // 计时器，用于控制射击间隔
@@ -21,6 +22,7 @@ public class VisitWeapon : MonoBehaviour
     {
         weaponSystem = GameObject.Find("WeaponSystem");
 
+        weaponSFX=GameObject.FindGameObjectWithTag("Audio").GetComponent<Audio>();
         bulletPos = transform.GetChild(0); // 获取子弹生成位置，后期视武器下子对象是否修改
     }
 
@@ -55,6 +57,9 @@ public class VisitWeapon : MonoBehaviour
     // 发射子弹
     private void FireBullet()
     {
+        //发射音效
+        weaponSFX.PlaySFX(weaponSFX.shootSFX1);
+
         //用欧拉数以表示旋转
         Quaternion rotationOffset = Quaternion.AngleAxis(270, Vector3.forward); // 调整子弹旋转方向，使其向上
         GameObject newBullet = Instantiate(bullet, bulletPos.position, this.gameObject.transform.rotation * rotationOffset,weaponSystem.transform.GetChild(0)); // 生成子弹

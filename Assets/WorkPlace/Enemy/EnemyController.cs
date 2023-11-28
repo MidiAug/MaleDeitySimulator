@@ -23,6 +23,8 @@ public class EnemyController : MonoBehaviour
     private GameObject enemySystem;
     private GameObject player;
 
+    private Audio enemyAudio;//敌人的音效插件 目前包内只有受击、死亡的音效
+
     // 相关变量，当前生命值，角色死亡后消失时间，生存状态
     public float curHp;
     public float desTime;
@@ -45,6 +47,7 @@ public class EnemyController : MonoBehaviour
         boxCollider2 = GetComponent<BoxCollider2D>();
         spriteRenderer2 = GetComponent<SpriteRenderer>();
 
+        enemyAudio = GameObject.FindGameObjectWithTag("Audio").GetComponent<Audio>();
         enemySystem = GameObject.Find("EnemySystem");        
         player = GameObject.FindGameObjectWithTag("Player");
 
@@ -119,9 +122,13 @@ public class EnemyController : MonoBehaviour
     public void Attacked(float damage)
     {
         curHp -= damage;
+        //播放受击音效
+        enemyAudio.PlaySFX(enemyAudio.getShot);
+
         //浮点数判断小于0，敌人死亡
         if (curHp < Mathf.Epsilon) 
         {
+            enemyAudio.PlaySFX(enemyAudio.enemyDead);
             spriteRenderer2.color = Color.white;
             StopCoroutine("AttackedAni");
             animator.SetTrigger("Die");

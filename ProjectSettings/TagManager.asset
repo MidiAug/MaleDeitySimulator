@@ -9,6 +9,7 @@ TagManager:
   - Weapon
   - box
   - Bullet
+  - Audio
   layers:
   - Default
   - TransparentFX
