@@ -33,7 +33,6 @@ public class Dropitem : MonoBehaviour
         {
             itemamount.SetText(this.item.Itemamount.ToString());
         }
-
         Inventorymanager.Instance.Refreshinventoryui();
     }
 }

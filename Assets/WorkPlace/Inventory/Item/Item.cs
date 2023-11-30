@@ -12,19 +12,19 @@ public class Item
         silverCoin,//银币
         bloodpacks//血瓶
     }
-    public string Itemname;
-    public int Itemamount;
+    public string Itemname;//物品名字
+    public int Itemamount;//物品数量
     public ItemType itemType;
     //获取当前物品的图片
     public Sprite Getitemsprite()
     {
         switch (itemType)
         {
-            default:
-            case Item.ItemType.copperCoin:return (Itemassets.Instance.Coopercoinprite);
-            case Item.ItemType.goldCoin: return (Itemassets.Instance.Goldcoinsprite);
-            case Item.ItemType.silverCoin: return (Itemassets.Instance.slivercoinprite);
-            case Item.ItemType.bloodpacks: return (Itemassets.Instance.Bloodpacksprite);
+            default: //在Itemassets中挂载着所有所需物品的图片，直接引用即可
+            case Item.ItemType.copperCoin:return (Itemassets.Instance.Coopercoinprite);//铜币
+            case Item.ItemType.goldCoin: return (Itemassets.Instance.Goldcoinsprite);//金币
+            case Item.ItemType.silverCoin: return (Itemassets.Instance.slivercoinprite);//银币
+            case Item.ItemType.bloodpacks: return (Itemassets.Instance.Bloodpacksprite); //血瓶
         }
-    }
+    }//物品图片 一一绑定
 }

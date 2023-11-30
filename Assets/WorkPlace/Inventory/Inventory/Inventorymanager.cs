@@ -6,32 +6,34 @@ using TMPro;
 public class Inventorymanager : MonoBehaviour
 {
     //背包管理器
-    public static Inventorymanager Instance { get; private set; }
+    public static Inventorymanager Instance { get; set; }
     private void Awake()
     {
         Instance = this;
-    }
-    private Inventory playerinventory;
-    //
-    [SerializeField]private Transform slotpanel;
-    [SerializeField]private GameObject slotprefab;
-    private GameObject player;
+    }//同理让背包最先生成，且只有一个实例
+
+    private Inventory playerinventory;//玩家背包
+
+    [SerializeField]public Transform slotpanel;
+    [SerializeField]public GameObject slotprefab;
+
+    private GameObject player;//玩家的实例
 
     //设置玩家背包
     public void Setplayerinventory(Inventory inventory)
     {
         playerinventory = inventory;
-        Refreshinventoryui();
+        Refreshinventoryui();//刷新背包的显示
     }
     //设置玩家
-    public void SetPlayer(GameObject player)
+    public void SetPlayer(GameObject player1)
     {
-        this.player = player;
+        player = player1;
     }
     //获取玩家
     public GameObject Getplayer()
     {
-        return this.player;
+        return player;
     }
     //刷新背包
     public void Refreshinventoryui()
@@ -44,9 +46,9 @@ public class Inventorymanager : MonoBehaviour
        //便利背包物品 建立新的插槽
        for(int i=0;i<playerinventory.GetItemList().Count;i++)
         {
-            if(playerinventory.GetItemList()[i]!=null)
+            if(playerinventory.GetItemList()[i]!=null)//playerinventory.GetItemList() 为ItemList 
             {
-                Item item = playerinventory.GetItemList()[i];
+                Item item = playerinventory.GetItemList()[i];//获取当前遍历到的物品
                 //生成slot
                 GameObject newslot = Instantiate(slotprefab, slotpanel);
                 newslot.GetComponent<Drop>().item=item;
