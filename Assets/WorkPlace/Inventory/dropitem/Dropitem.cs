@@ -9,6 +9,8 @@ public class Dropitem : MonoBehaviour
     {
         GameObject newDropitem = Instantiate(Itemassets.Instance.DropitemPrefab,position,Quaternion.identity);
         //设置物品信息
+
+
         Rigidbody2D rg = newDropitem.GetComponent<Rigidbody2D>();
         rg.velocity = (position.normalized) * 4.0f;
         Dropitem dropitem = newDropitem.GetComponent<Dropitem>();
@@ -17,7 +19,6 @@ public class Dropitem : MonoBehaviour
     }
 
     private SpriteRenderer itemspriteRenderer;
-
     private TextMeshProUGUI itemamount;
     private void Awake()
     {
@@ -29,10 +30,10 @@ public class Dropitem : MonoBehaviour
     {
         this.item = item;
         itemspriteRenderer.sprite = this.item.Getitemsprite();
-        if(this.item.Itemamount>1)
-        {
-            itemamount.SetText(this.item.Itemamount.ToString());
-        }
-        Inventorymanager.Instance.Refreshinventoryui();
+        //if(this.item.Itemamount>1)
+        //{
+        //    itemamount.SetText(this.item.Itemamount.ToString());
+        //}
+
     }
 }

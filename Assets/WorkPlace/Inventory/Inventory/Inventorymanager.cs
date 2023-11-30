@@ -25,6 +25,11 @@ public class Inventorymanager : MonoBehaviour
         playerinventory = inventory;
         Refreshinventoryui();//刷新背包的显示
     }
+    //获取玩家背包
+    public Inventory GetplayerInventory()
+    {
+        return playerinventory;
+    }
     //设置玩家
     public void SetPlayer(GameObject player1)
     {
