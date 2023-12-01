@@ -10,6 +10,7 @@ TagManager:
   - box
   - Bullet
   - Audio
+  - item
   layers:
   - Default
   - TransparentFX

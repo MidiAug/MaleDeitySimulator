@@ -52,12 +52,12 @@ public class Inventorymanager : MonoBehaviour
        for(int i=0;i<playerinventory.GetItemList().Count;i++)
         {
             if(playerinventory.GetItemList()[i]!=null)//playerinventory.GetItemList() 为ItemList 
-            {
-                Item item = playerinventory.GetItemList()[i];//获取当前遍历到的物品
+            {//获取当前遍历到的物品
+                Item item = playerinventory.GetItemList()[i];
                 //生成slot
                 GameObject newslot = Instantiate(slotprefab, slotpanel);
-                newslot.GetComponent<Drop>().item=item;
-                //信息同步到item上
+                //Item Orignalitem = new Item { itemType= item.itemType,Itemamount= item.Itemamount,Itemname=item.Itemname};
+                newslot.GetComponent<Drop>().item= item;
                 newslot.GetComponent<Image>().sprite = item.Getitemsprite();
                 if(item.Itemamount>1)
                 {

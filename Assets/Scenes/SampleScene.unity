@@ -2324,7 +2324,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &613974433
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2776,7 +2776,7 @@ CapsuleCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 820515001}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
   m_IncludeLayers:
@@ -2836,9 +2836,9 @@ CircleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: -0.005460024, y: -0.054600358}
   serializedVersion: 2
-  m_Radius: 0.5555556
+  m_Radius: 0.8230971
 --- !u!114 &820515015
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4123,46 +4123,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1705980609705425402, guid: 16675626c1c58ee41b0787cac4df1ce2, type: 3}
-      propertyPath: m_TagString
-      value: Untagged
-      objectReference: {fileID: 0}
-    - target: {fileID: 1849643894485661544, guid: 16675626c1c58ee41b0787cac4df1ce2, type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1983189800452615301, guid: 16675626c1c58ee41b0787cac4df1ce2, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1983189800452615301, guid: 16675626c1c58ee41b0787cac4df1ce2, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1983189800452615301, guid: 16675626c1c58ee41b0787cac4df1ce2, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1983189800452615301, guid: 16675626c1c58ee41b0787cac4df1ce2, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 3599778926393816995, guid: 16675626c1c58ee41b0787cac4df1ce2, type: 3}
       propertyPath: m_Name
       value: Dropitem
       objectReference: {fileID: 0}
-    - target: {fileID: 3599778926393816995, guid: 16675626c1c58ee41b0787cac4df1ce2, type: 3}
-      propertyPath: m_IsActive
+    - target: {fileID: 6330701676951621653, guid: 16675626c1c58ee41b0787cac4df1ce2, type: 3}
+      propertyPath: m_Mass
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 3599778926393816995, guid: 16675626c1c58ee41b0787cac4df1ce2, type: 3}
-      propertyPath: m_TagString
-      value: box
-      objectReference: {fileID: 0}
-    - target: {fileID: 4274110070414273426, guid: 16675626c1c58ee41b0787cac4df1ce2, type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 934571490, guid: 0d5e657ee5a074e4baa53d5b248a01d2, type: 3}
     - target: {fileID: 8182870000951300697, guid: 16675626c1c58ee41b0787cac4df1ce2, type: 3}
       propertyPath: m_LocalPosition.x
       value: 2.52

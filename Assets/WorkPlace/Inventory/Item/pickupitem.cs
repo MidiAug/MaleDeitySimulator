@@ -5,6 +5,8 @@ using UnityEngine;
 public class pickupitem : MonoBehaviour
 {
     private Inventory inventory;
+    private bool Ispick=false;
+    private Dropitem dropitem;
     private void Start()//不能使用awake因为实例还没创建
     {
         Inventorymanager.Instance.SetPlayer(this.gameObject);
@@ -15,9 +17,35 @@ public class pickupitem : MonoBehaviour
         inventory.Additem(new Item { itemType = Item.ItemType.silverCoin, Itemamount = 4, Itemname = "bloodpacks" });
         inventory.Additem(new Item { itemType = Item.ItemType.bloodpacks, Itemamount = 3, Itemname = "bloodpacks" });
         Inventorymanager.Instance.Setplayerinventory(inventory);
+    }
+    private void Update()
+    {
+        if(Ispick==true)
+        {
+            if(Input.GetKeyDown(KeyCode.Space))
+            {
+                inventory.Additem(dropitem.item);
+                Inventorymanager.Instance.Refreshinventoryui();
+                Ispick = false;
+                GameObject.Destroy(dropitem.gameObject);
+            }
+        }
+    } 
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if(collision.gameObject.CompareTag("item"))
+        {
+            dropitem = collision.gameObject.GetComponent<Dropitem>();
+            if(dropitem!=null)
+            {
+                Ispick = true;
+            }
+        }
+    }//持续触发碰撞器用于拾取物品
 
-        Dropitem.Createitem(this.gameObject.transform.position, new Item { itemType = Item.ItemType.goldCoin, Itemamount = 666, Itemname = "goldCoin" });
-        Dropitem.Createitem(this.gameObject.transform.position, new Item { itemType = Item.ItemType.copperCoin, Itemamount = 555, Itemname = "bloodpacks" });
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        Ispick = false;
     }
 }
 

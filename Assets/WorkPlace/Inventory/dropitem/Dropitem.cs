@@ -4,15 +4,23 @@ using UnityEngine;
 using TMPro;
 public class Dropitem : MonoBehaviour
 {
-    Item item;
-    public static Dropitem Createitem(Vector2 position, Item item)
+    public Item item;
+   
+    public static Dropitem Createitem(Vector2 position, Item item,bool Isdrop)//是否通过丢弃的形式创建，后面把凋落物也用这个生成
     {
-        GameObject newDropitem = Instantiate(Itemassets.Instance.DropitemPrefab,position,Quaternion.identity);
-        //设置物品信息
-
-
-        Rigidbody2D rg = newDropitem.GetComponent<Rigidbody2D>();
-        rg.velocity = (position.normalized) * 4.0f;
+        Vector2 Dropdir = Vector2.zero; 
+        GameObject newDropitem;
+        if(Isdrop)
+        {
+            Dropdir = new Vector2(Random.Range(1.0f, -1.0f), Random.Range(1.0f, -1.0f));
+            newDropitem = Instantiate(Itemassets.Instance.DropitemPrefab, position, Quaternion.identity);
+            Rigidbody2D rg = newDropitem.GetComponent<Rigidbody2D>(); 
+            rg.velocity = (Dropdir.normalized)* 2.5f;
+        }
+        else
+        {
+            newDropitem = Instantiate(Itemassets.Instance.DropitemPrefab,position,Quaternion.identity);
+        }
         Dropitem dropitem = newDropitem.GetComponent<Dropitem>();
         dropitem.Setitem(item);
         return dropitem;
@@ -30,10 +38,5 @@ public class Dropitem : MonoBehaviour
     {
         this.item = item;
         itemspriteRenderer.sprite = this.item.Getitemsprite();
-        //if(this.item.Itemamount>1)
-        //{
-        //    itemamount.SetText(this.item.Itemamount.ToString());
-        //}
-
     }
 }
