@@ -21,7 +21,6 @@ public class Drop : MonoBehaviour,IPointerClickHandler
             if (item.Itemamount > 1)
             {
                 item.Itemamount--;
-
             }
             else
             {

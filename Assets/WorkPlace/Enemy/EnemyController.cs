@@ -196,7 +196,9 @@ public class EnemyController : MonoBehaviour
         //Instantiate(obj[Random.Range(0, obj.Length)], pos1, Quaternion.identity);
         if(Random.value < enemyData.boxPossibility)
         {
+
             Instantiate(enemyData.boxPrefab, transform.position, Quaternion.identity);
+
         }
     }
 
