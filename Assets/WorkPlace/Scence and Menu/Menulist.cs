@@ -2,17 +2,26 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class Menu : MonoBehaviour
 {
-    public GameObject menuList;
     [SerializeField] private AudioSource bgm;
-    [SerializeField] private bool menukey=true;
+    public GameObject gameUI;// 暂停界面时把ui隐藏
+    public GameObject menuList;
+    private bool menukey=true;
 
-    Audio selectSFX;
+    Slider volumeSlider;
+    Audio audioSystem;
+    private void Awake()
+    {
+        volumeSlider = menuList.transform.Find("Menu").Find("Volume").GetComponent<Slider>();
+    }
     void Start()
     {
-        selectSFX=GameObject.FindGameObjectWithTag("Audio").GetComponent<Audio>();
+        volumeSlider.value = 1;
+        audioSystem = GameObject.FindGameObjectWithTag("Audio").GetComponent<Audio>();
+        menuList.SetActive(false);
     }
 
     // Update is called once per frame
@@ -25,39 +34,51 @@ public class Menu : MonoBehaviour
                 menuList.SetActive(true);
                 menukey = false;
                 Time.timeScale = (0);//时间暂停
-                bgm.Pause();//bgm暂停
+                //audioSystem.SetVolum(audioSystem.curVolum/2);
+                // bgm.Pause();//bgm暂停
+                gameUI.SetActive(false);
+               
             }
+            
         }
-        else if(Input.GetKeyDown(KeyCode.Escape))
+        else// 菜单中
         {
-            menuList.SetActive(false);
-            menukey = true;
-            Time.timeScale = (1);//时间恢复正常
-            bgm.Play();//bgm播放
+            if (Input.GetKeyDown(KeyCode.Escape))
+            {
+                menuList.SetActive(false);
+                menukey = true;
+                Time.timeScale = (1);//时间恢复正常
+                //audioSystem.SetVolum(audioSystem.curVolum * 2);
+                gameUI.SetActive(true);
+            }
+            audioSystem.SetVolum((float)(volumeSlider.value));
         }
+
     }
     public void Return()//返回游戏
     {
         //按键音效
-        selectSFX.PlaySFX(selectSFX.selectMenu);
+        audioSystem.PlaySFX(audioSystem.selectMenu);
 
         menuList.SetActive(false);
         menukey = true;
         Time.timeScale = (1);//时间恢复正常
         bgm.Play();//bgm播放
+        gameUI.SetActive(true);
     }
     public void Restart()//重开
     {
         //按键音效
-        selectSFX.PlaySFX(selectSFX.selectMenu);
+        audioSystem.PlaySFX(audioSystem.selectMenu);
 
         SceneManager.LoadScene(0);
         Time.timeScale = 1;
+        gameUI.SetActive(true);
     }
     public void Quit()//退出游戏
     {
         //按键音效
-        selectSFX.PlaySFX(selectSFX.selectMenu);
+        audioSystem.PlaySFX(audioSystem.selectMenu);
 
         Application.Quit();
     }

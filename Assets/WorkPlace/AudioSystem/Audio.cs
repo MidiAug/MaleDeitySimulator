@@ -19,6 +19,7 @@ public class Audio : MonoBehaviour
     public AudioClip win;
     public AudioClip enemyDead;
 
+    public float curVolum;
     //开始时播放bgm
     private void Start()
     {
@@ -33,6 +34,9 @@ public class Audio : MonoBehaviour
         if(clip==lost)
             bgmPlayer.Pause();
     }
-
+    public void SetVolum(float val)
+    {
+        bgmPlayer.volume = sfxPlayer.volume = val;
+    }
 
 }
