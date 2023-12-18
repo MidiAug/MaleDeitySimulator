@@ -12,10 +12,10 @@ public class pickupitem : MonoBehaviour
         Inventorymanager.Instance.SetPlayer(this.gameObject);
         inventory = new Inventory();
         //测试添加物品
-        //inventory.Additem(new Item { itemType = Item.ItemType.goldCoin, Itemamount = 6, Itemname = "goldCoin" });
-        //inventory.Additem(new Item { itemType = Item.ItemType.copperCoin, Itemamount = 5, Itemname = "bloodpacks" });
-        //inventory.Additem(new Item { itemType = Item.ItemType.silverCoin, Itemamount = 4, Itemname = "bloodpacks" });
-        //inventory.Additem(new Item { itemType = Item.ItemType.bloodpacks, Itemamount = 3, Itemname = "bloodpacks" });
+        inventory.Additem(new Item { itemType = Item.ItemType.goldCoin, Itemamount = 6, Itemname = "goldCoin" });
+        inventory.Additem(new Item { itemType = Item.ItemType.copperCoin, Itemamount = 5, Itemname = "bloodpacks" });
+        inventory.Additem(new Item { itemType = Item.ItemType.silverCoin, Itemamount = 4, Itemname = "bloodpacks" });
+        inventory.Additem(new Item { itemType = Item.ItemType.bloodpacks, Itemamount = 3, Itemname = "bloodpacks" });
         Inventorymanager.Instance.Setplayerinventory(inventory);
     }
     private void Update()
@@ -36,9 +36,9 @@ public class pickupitem : MonoBehaviour
         if(collision.gameObject.CompareTag("item"))
         {
             dropitem = collision.gameObject.GetComponent<Dropitem>();
-            if(dropitem!=null)
+            if(dropitem!=null)//不是空气而是一个掉落物
             {
-                Ispick = true;
+                Ispick = true;//通过开关ispick判断拾取
             }
         }
     }//持续触发碰撞器用于拾取物品
