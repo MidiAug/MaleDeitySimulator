@@ -11,6 +11,8 @@ public class WeaponData : ScriptableObject
     public string Name;       // 武器的名称
     public string type;       // 武器的类型
     public float damage;      // 武器的伤害值
+    public float critical;    // 暴击概率
+    public int weight;        // 生成权重
     [TextArea] public string info;  // 武器的描述信息
     public GameObject prefab; // 武器的预制体（用于在游戏中生成武器）
 

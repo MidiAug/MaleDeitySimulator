@@ -16,6 +16,8 @@ MonoBehaviour:
   Name: rifle
   type: rifle
   damage: 10
+  critical: 0.05
+  weight: 1
   info: "\u6B65\u67AA"
   prefab: {fileID: 7804617253393244797, guid: 0a0a897a9ba289e4686938dea4b3c2ff, type: 3}
   FireTimer: 0.1
