@@ -34,6 +34,8 @@ public class PlayerController : MonoBehaviour
 
     public int coinNum;// 暂时充当背包
 
+    //加载人物死亡界面
+    public GameObject deadmenu;
     void Start()
     {
         // 获取组件，初始化角色血量
@@ -48,6 +50,8 @@ public class PlayerController : MonoBehaviour
         levelText = playerUI.transform.GetChild(2).gameObject.GetComponent<Text>();
         curHp = maxHp;
         curLevel = 1;
+        //初始不要加载死亡界面
+        deadmenu.SetActive(false);
     }
 
     void Update()
@@ -93,7 +97,7 @@ public class PlayerController : MonoBehaviour
                 ani.SetTrigger("Die");
                 //失败音效
                 playerAudio.PlaySFX(playerAudio.lost);
-
+                deadmenu.SetActive(true);
                 for (int i = 0; i < transform.childCount; i++)
                 {
                     Destroy(transform.GetChild(i).gameObject);
