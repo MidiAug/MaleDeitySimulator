@@ -13,10 +13,11 @@ public class pickupitem : MonoBehaviour
         inventory = new Inventory();
         //测试添加物品
         inventory.Additem(new Item { itemType = Item.ItemType.goldCoin, Itemamount = 6, Itemname = "goldCoin" });
-        inventory.Additem(new Item { itemType = Item.ItemType.copperCoin, Itemamount = 5, Itemname = "bloodpacks" });
-        inventory.Additem(new Item { itemType = Item.ItemType.silverCoin, Itemamount = 4, Itemname = "bloodpacks" });
+        inventory.Additem(new Item { itemType = Item.ItemType.copperCoin, Itemamount = 5, Itemname = "copperCoin" });
+        inventory.Additem(new Item { itemType = Item.ItemType.silverCoin, Itemamount = 4, Itemname = "silverCoin" });
         inventory.Additem(new Item { itemType = Item.ItemType.bloodpacks, Itemamount = 3, Itemname = "bloodpacks" });
         Inventorymanager.Instance.Setplayerinventory(inventory);
+        anobag.Instance.Setplayerinventory(inventory);
     }
     private void Update()
     {
@@ -28,6 +29,40 @@ public class pickupitem : MonoBehaviour
                 Inventorymanager.Instance.Refreshinventoryui();
                 Ispick = false;
                 GameObject.Destroy(dropitem.gameObject);
+            }
+        }
+        if (Input.GetKeyDown(KeyCode.F))//使用血瓶
+        {
+            float Hp;
+            Inventory playerInventory= Inventorymanager.Instance.GetplayerInventory();
+            for (int i = 0; i < playerInventory.GetItemList().Count; i++)
+            {
+                if (playerInventory.GetItemList()[i] != null)
+                {
+                    Item item = playerInventory.GetItemList()[i];
+                    if (item.Itemname == "bloodpacks")
+                    {
+                        if(PlayerController.curHp == PlayerController.maxHp)
+                        {
+                            break;
+                        }
+                        if (item.Itemamount > 1)
+                        {
+                            item.Itemamount--;
+                        }
+                        else
+                        {
+                            playerInventory.GetItemList().Remove(item);
+                        }
+                        PlayerController.curHp += (PlayerController.maxHp)/4;
+                        if(PlayerController.curHp> PlayerController.maxHp)
+                        {
+                            PlayerController.curHp = PlayerController.maxHp;
+                        }
+                        Inventorymanager.Instance.Refreshinventoryui();
+                        anobag.Instance.Refreshinventoryui();
+                    }
+                }
             }
         }
     } 

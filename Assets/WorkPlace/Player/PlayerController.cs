@@ -6,7 +6,8 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
-{
+{    
+    public static PlayerController Instance { get; set; }
     // 组件
     private Animator ani;
     private Rigidbody2D rbody;
@@ -18,8 +19,8 @@ public class PlayerController : MonoBehaviour
 
     //人物相关属性
     private float moveSpeed = 5f;
-    private float maxHp = 100;
-    private float curHp;
+    public static float maxHp = 100;
+    public static float curHp;
     private float maxExp = 100;
     private float curExp = 0;
     public float curLevel =1;
@@ -124,7 +125,14 @@ public class PlayerController : MonoBehaviour
         }
         curHp = Mathf.Clamp(curHp + val, 0 , maxHp);
     }
-
+    public float GetcurHp()
+    {
+        return curHp;
+    }
+    public void SetcurHp(float Hp)
+    {
+        curHp=Hp;
+    }
     // 销毁人物对象
     private void KillPlayer()
     {
