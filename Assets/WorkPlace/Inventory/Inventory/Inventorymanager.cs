@@ -41,6 +41,19 @@ public class Inventorymanager : MonoBehaviour
         return player;
     }
     //刷新背包
+    public string Getinformation(Item item)
+    {
+        string iteminform;
+        switch (item.Itemname)
+        {
+            default: //在Itemassets中挂载着所有所需物品的图片，直接引用即可
+            case "bloodpacks": iteminform = "Here are some bloodpacks!  You can click the ‘f’ to use it"; break;
+            case "copperCoin": iteminform = "Here are some bloodpacks! You can click the ‘f’ to use it"; break;
+            case "goldCoin": iteminform = "Here are some bloodpacks! You can click the ‘f’ to use it"; break;
+            case "silverCoin": iteminform = "Here are some bloodpacks!  You can click the ‘f’ to use it"; break;
+        }
+        return iteminform;
+    }
     public void Refreshinventoryui()
     {
         //删除原来旧的
@@ -63,6 +76,9 @@ public class Inventorymanager : MonoBehaviour
                 {
                     newslot.transform.GetChild(0).GetComponent<TextMeshProUGUI>().SetText(item.Itemamount.ToString());
                 }
+                //物品的信息：
+                newslot.transform.GetChild(1).GetChild(0).GetComponent<TextMeshProUGUI>().SetText(Getinformation(item).ToString());//Inventoryinform.Instance.Getinformation(item));
+                newslot.transform.GetChild(1).gameObject.SetActive(false);
             }
         }
     }

@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 public class Drop : MonoBehaviour,IPointerClickHandler
 {
+    public static Drop Instance { get; set; }
     public Item item;
     private Item Orignalitem;
     private Inventory playerinventory;
