@@ -33,7 +33,6 @@ public class pickupitem : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.F))//Ê¹ÓÃÑªÆ¿
         {
-            float Hp;
             Inventory playerInventory= Inventorymanager.Instance.GetplayerInventory();
             for (int i = 0; i < playerInventory.GetItemList().Count; i++)
             {

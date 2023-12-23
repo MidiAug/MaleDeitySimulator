@@ -19,6 +19,7 @@ public class AimSystem : MonoBehaviour
     // 组件
     Camera cam;
     SpriteRenderer spriteRenderer;
+    SpriteRenderer kuntou;
 
     //Awake在Start方法之前被调用，这段代码为了保证只有一个AimSystem实例
     private void Awake()
@@ -37,6 +38,7 @@ public class AimSystem : MonoBehaviour
     {
         cam = Camera.main;
         spriteRenderer = this.gameObject.transform.parent.GetComponent<SpriteRenderer>();   // 获取主摄像机和父对象的 SpriteRenderer 组件
+        kuntou = transform.parent.Find("kuntou").GetComponent<SpriteRenderer>(); 
 
         currentWeapon = this.transform.GetChild(0).gameObject;    // 获取当前武器对象
     }
@@ -73,11 +75,13 @@ public class AimSystem : MonoBehaviour
         if (angle < 90 && angle > -90)
         {
             spriteRenderer.flipX = false;
+            kuntou.flipX = false;
             currentWeapon.GetComponent<SpriteRenderer>().flipY = false;
         }
         else
         {
             spriteRenderer.flipX = true;
+            kuntou.flipX = true;
             currentWeapon.GetComponent<SpriteRenderer>().flipY = true;
         }
     }

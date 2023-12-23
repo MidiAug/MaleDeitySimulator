@@ -51,6 +51,7 @@ public class PlayerController : MonoBehaviour
         levelText = playerUI.transform.GetChild(2).gameObject.GetComponent<Text>();
         curHp = maxHp;
         curLevel = 1;
+        coinNum = 0;
         //初始不要加载死亡界面
         deadmenu.SetActive(false);
     }

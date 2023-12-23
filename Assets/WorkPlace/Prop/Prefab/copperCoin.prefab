@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 3799499178330583424}
   - component: {fileID: 3596609109662786101}
   - component: {fileID: 1836049410824193000}
-  - component: {fileID: 3852111138898948059}
   - component: {fileID: 3293248444542321062}
+  - component: {fileID: 1154994984624167082}
   m_Layer: 0
   m_Name: copperCoin
   m_TagString: Untagged
@@ -132,19 +132,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.5555556, y: 0.6111111}
   m_EdgeRadius: 0
---- !u!114 &3852111138898948059
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2889966694698868714}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 96e5598b544a4bd498033777497ea211, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  propData: {fileID: 11400000, guid: 0a9299b042b57184b929684969d54424, type: 2}
 --- !u!50 &3293248444542321062
 Rigidbody2D:
   serializedVersion: 4
@@ -172,3 +159,16 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &1154994984624167082
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2889966694698868714}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 18980f07b8e8883489fe0e1490c534e5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  propData: {fileID: 11400000, guid: 0a9299b042b57184b929684969d54424, type: 2}

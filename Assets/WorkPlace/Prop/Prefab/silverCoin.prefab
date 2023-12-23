@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1091464961985932158}
   - component: {fileID: 1999300926787763854}
   - component: {fileID: 468412840900269642}
-  - component: {fileID: -4487539323066549103}
+  - component: {fileID: 8788220767304358103}
   m_Layer: 0
   m_Name: silverCoin
   m_TagString: Untagged
@@ -159,7 +159,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &-4487539323066549103
+--- !u!114 &8788220767304358103
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -168,8 +168,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 8756282114436307601}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 96e5598b544a4bd498033777497ea211, type: 3}
+  m_Script: {fileID: 11500000, guid: 18980f07b8e8883489fe0e1490c534e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   propData: {fileID: 11400000, guid: 43b78c56880e58c4e85dd0a38af5366e, type: 2}
-  coinNum: 0

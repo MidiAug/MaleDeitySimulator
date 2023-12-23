@@ -35,10 +35,17 @@ public class EnemyController : MonoBehaviour
     private float blinkTime = 0.2f;
     bool isBlink;// 避免频繁收到伤害时多次协程闪烁同时开启
 
-
+    private PropList coinList;
+    private float conProb = 5;
+    private float boxProb = 3;
+    private float nonProb = 1;
     /// <summary>
     /// EnemyController的相关方法
     /// </summary>
+    private void Awake()
+    {
+        coinList = (PropList)Resources.Load("coinList");
+    }
     private void Start()
     {
         //获取组件
@@ -146,7 +153,7 @@ public class EnemyController : MonoBehaviour
             Destroy(gameObject.GetComponent<CapsuleCollider2D>());
 
             // 生成宝箱
-            BoxGenerate();
+            GenerateProp();
 
             // 经验
             player.GetComponent<PlayerController>().InExp(20);
@@ -190,16 +197,44 @@ public class EnemyController : MonoBehaviour
         spriteRenderer2.flipX = isOrNot;
     }
 
-    // 生成宝箱
-    void BoxGenerate()
+    // 生成道具 先写的比较拉，无所谓了
+    void GenerateProp()
     {
         //Instantiate(obj[Random.Range(0, obj.Length)], pos1, Quaternion.identity);
-        if(Random.value < enemyData.boxPossibility)
+        float totalWeight = conProb + boxProb + nonProb;
+
+        float randWeight = Random.value * totalWeight;
+
+        randWeight -= conProb;
+        if(randWeight < 0f)
         {
+            float atotalWeight = 0f;
+            foreach (PropData tmp in coinList.list)
+            {
+                atotalWeight += tmp.weight;
+            }
 
-            Instantiate(enemyData.boxPrefab, transform.position, Quaternion.identity);
-
+            float arandomValue = Random.value * atotalWeight;
+            foreach (PropData tmp in coinList.list)
+            {
+                arandomValue -= tmp.weight;
+                if (arandomValue <= 0f)
+                {
+                    Instantiate(tmp.prefab, transform.position, Quaternion.identity);
+                    break;
+                }
+            }
         }
+        else
+        {
+            randWeight -= boxProb;
+            if (randWeight < 0f)
+            {
+                Instantiate(enemyData.boxPrefab, transform.position, Quaternion.identity);
+            }
+        }
+
+        
     }
 
 }

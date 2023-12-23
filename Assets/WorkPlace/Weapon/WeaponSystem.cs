@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 // 武器管理系统
 public class WeaponSystem : MonoBehaviour
@@ -9,12 +10,14 @@ public class WeaponSystem : MonoBehaviour
     WeaponList weaponList;
     WeaponData weaponData;
 
+    Image curWeapon;
     // 当前武器的索引
     int weaponIndex = 0;
 
     // 在 Awake 阶段，即start之前获取文件
     private void Awake()
     {
+        
         // 加载武器列表
         weaponList = Resources.Load<WeaponList>("WeaponList");
         if (weaponList != null)
@@ -24,11 +27,16 @@ public class WeaponSystem : MonoBehaviour
             AimSystem.UpdateWeapon(weaponData);
         }
     }
-
+    private void Start()
+    {
+        curWeapon = GameObject.FindWithTag("GameUI").transform.GetChild(2).GetChild(0).GetComponent<Image>();
+        curWeapon.sprite = weaponData.sprite;
+    }
     // 在每一帧更新检测武器切换
     private void Update()
     {
         ChangeWeapon();
+
     }
 
     // 处理武器切换逻辑
@@ -61,5 +69,7 @@ public class WeaponSystem : MonoBehaviour
             weaponData = weaponList.list[weaponIndex];
             AimSystem.UpdateWeapon(weaponData);
         }
+        curWeapon.sprite = weaponData.sprite;
+
     }
 }

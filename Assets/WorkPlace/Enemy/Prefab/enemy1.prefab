@@ -706,8 +706,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyData: {fileID: 11400000, guid: 5a49c6e1c2976ed46aee205d459a6ef3, type: 2}
+  arrowPrefab: {fileID: 0}
   curHp: 0
   desTime: 0
-  obj:
-  - {fileID: 8820839241257077207, guid: 3943b1e4a84a11e4591b31a1f842854f, type: 3}
-  - {fileID: 4698090169347634054, guid: da018742fbbab9042b761508736916a5, type: 3}
+  die: 0

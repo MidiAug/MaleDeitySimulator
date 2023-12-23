@@ -18,6 +18,7 @@ public class Audio : MonoBehaviour
     public AudioClip selectMenu;
     public AudioClip win;
     public AudioClip enemyDead;
+    public AudioClip pickUpCoin;
 
     public float curVolum;
     //开始时播放bgm
