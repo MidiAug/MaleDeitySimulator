@@ -21,7 +21,8 @@ public class BoxController : MonoBehaviour
     private void open()
     {
         float totalWeight = 0f;
-        foreach (PropData tmp in propList.list) {
+        foreach (PropData tmp in propList.list)
+        {
             totalWeight += tmp.weight;
         }
 
@@ -37,10 +38,10 @@ public class BoxController : MonoBehaviour
                 {
                     default:
                     case "bloodpacks": item.itemType = Item.ItemType.bloodpacks; item.Itemname = "bloodpacks"; break;
-                    //case "goldcoins": item.itemType = Item.ItemType.damagepacks; item.Itemname = "damagepacks"; break;
-                    //case "silverCoin": item.itemType = Item.ItemType.damagepacks; item.Itemname = "damagepacks"; break;
                     case "goldCoin": item.itemType = Item.ItemType.damagepacks; item.Itemname = "damagepacks"; break;
-                    //case "copperCoin": item.itemType = Item.ItemType.damagepacks; item.Itemname = "damagepacks"; break;
+                    case "silverCoin": item.itemType = Item.ItemType.crytalpacks; item.Itemname = "crytalpacks"; break;
+                    case "copperCoin": item.itemType = Item.ItemType.wudipacks; item.Itemname = "wudipacks"; break;
+
                 }//遍历列表中的物品，当在当前物品的时候总权值小于零则判定掉落这个物品，然后设置掉落物的名称，种类
                 Dropitem.Createitem(transform.position, item, false);
                 //Instantiate(tmp.prefab, transform.position, Quaternion.identity);原代码
