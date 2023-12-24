@@ -28,7 +28,7 @@ public class PlayerController : MonoBehaviour
     private Audio playerAudio;//玩家音效，目前包内只有射击、胜利、战败、升级的音效
 
     public bool die = false;
-    private bool isInvincible;//判断是否无敌，用于限制角色掉血方法调用间隔过短
+    public bool isInvincible;//判断是否无敌，用于限制角色掉血方法调用间隔过短
 
     private int numBlink = 2;
     private float blinkTime = 0.2f;

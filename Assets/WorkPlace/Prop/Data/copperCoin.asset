@@ -15,6 +15,6 @@ MonoBehaviour:
   Name: CopperCoin
   type: Coin
   val: 1
-  weight: 5
+  weight: 1
   info: 
   prefab: {fileID: 2889966694698868714, guid: 919f95bf71bd65a4d90d0ed90dbd33da, type: 3}

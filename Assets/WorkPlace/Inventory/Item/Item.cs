@@ -7,11 +7,10 @@ public class Item
 {
     public enum ItemType
     {
-        //goldCoin,//金币
-        //copperCoin,//铜币
-        //silverCoin,//银币
         bloodpacks,//血瓶
-        damagepacks
+        damagepacks,//伤害药水
+        wudipacks,//无敌药水
+        crytalpacks//水晶药水
     }
     public string Itemname;//物品名字
     public int Itemamount;//物品数量
@@ -22,9 +21,8 @@ public class Item
         switch (itemType)
         {
             default: //在Itemassets中挂载着所有所需物品的图片，直接引用即可
-            //case Item.ItemType.copperCoin:return (Itemassets.Instance.Coopercoinprite);//铜币
-            //case Item.ItemType.goldCoin: return (Itemassets.Instance.Goldcoinsprite);//金币
-            //case Item.ItemType.silverCoin: return (Itemassets.Instance.slivercoinprite);//银币
+            case Item.ItemType.crytalpacks: return (Itemassets.Instance.crytalpacksprite);//金币
+            case Item.ItemType.wudipacks: return (Itemassets.Instance.wudipacksprite);//银币
             case Item.ItemType.bloodpacks: return (Itemassets.Instance.Bloodpacksprite); //血瓶
             case Item.ItemType.damagepacks: return (Itemassets.Instance.Damagepacksprite); //血瓶
         }

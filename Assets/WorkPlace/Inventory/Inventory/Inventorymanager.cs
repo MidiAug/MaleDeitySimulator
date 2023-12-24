@@ -14,8 +14,8 @@ public class Inventorymanager : MonoBehaviour
 
     private Inventory playerinventory;//玩家背包
 
-    [SerializeField]public Transform slotpanel;
-    [SerializeField]public GameObject slotprefab;
+    [SerializeField] public Transform slotpanel;
+    [SerializeField] public GameObject slotprefab;
 
     private GameObject player;//玩家的实例
 
@@ -49,31 +49,31 @@ public class Inventorymanager : MonoBehaviour
             default: //在Itemassets中挂载着所有所需物品的图片，直接引用即可
             case "bloodpacks": iteminform = "Here are some bloodpacks!  You can click the ‘1’ to use it"; break;
             case "damagepacks": iteminform = "Here are some damagepacks!  You can click the ‘2’ to use it"; break;
-                //case "copperCoin": iteminform = "Here are some bloodpacks! You can click the ‘f’ to use it"; break;
-                //case "goldCoin": iteminform = "Here are some bloodpacks! You can click the ‘f’ to use it"; break;
-                //case "silverCoin": iteminform = "Here are some bloodpacks!  You can click the ‘f’ to use it"; break;
+            case "crytalpacks": iteminform = "Here are some crytalpacks!  You can click the ‘3’ to use it"; break;
+            case "wudipacks": iteminform = "Here are some wudipacks!  You can click the ‘4’ to use it"; break;
+
         }
         return iteminform;
     }
     public void Refreshinventoryui()
     {
         //删除原来旧的
-       foreach(Transform child in slotpanel.transform)
-       {
-         GameObject.Destroy(child.gameObject);
-       }
-       //便利背包物品 建立新的插槽
-       for(int i=0;i<playerinventory.GetItemList().Count;i++)
+        foreach (Transform child in slotpanel.transform)
         {
-            if(playerinventory.GetItemList()[i]!=null)//playerinventory.GetItemList() 为ItemList 
+            GameObject.Destroy(child.gameObject);
+        }
+        //便利背包物品 建立新的插槽
+        for (int i = 0; i < playerinventory.GetItemList().Count; i++)
+        {
+            if (playerinventory.GetItemList()[i] != null)//playerinventory.GetItemList() 为ItemList 
             {//获取当前遍历到的物品
                 Item item = playerinventory.GetItemList()[i];
                 //生成slot
                 GameObject newslot = Instantiate(slotprefab, slotpanel);
                 //Item Orignalitem = new Item { itemType= item.itemType,Itemamount= item.Itemamount,Itemname=item.Itemname};
-                newslot.GetComponent<Drop>().item= item;
+                newslot.GetComponent<Drop>().item = item;
                 newslot.GetComponent<Image>().sprite = item.Getitemsprite();
-                if(item.Itemamount>1)
+                if (item.Itemamount > 1)
                 {
                     newslot.transform.GetChild(0).GetComponent<TextMeshProUGUI>().SetText(item.Itemamount.ToString());
                 }
@@ -84,4 +84,3 @@ public class Inventorymanager : MonoBehaviour
         }
     }
 }
-
