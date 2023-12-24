@@ -1,3 +1,4 @@
+using System.Diagnostics;
 using UnityEngine;
 
 public class EnemySystem : MonoBehaviour
@@ -10,54 +11,95 @@ public class EnemySystem : MonoBehaviour
     GameObject enemySystem;
 
     // 属性
-    public float enemyInterval = 3f;    //敌人生成间隔时间
+    public float enemyInterval = 1.5f;    //敌人生成间隔时间
     public float[] enemyPossibility =new float[3] { 0.6f, 0.3f, 0.1f };//生成第一、二、三类敌人概率
-    private void Awake()
-    {
-        enemyList = Resources.Load<EnemyList>(typeof(EnemyList).Name);
 
-    }
+    // 敌人波次
+    private int enemyAmount; //每波敌人生成数量
+    private float spawnInterval = 5f;//每波间隔时间
+    private float timerIsSpawn = 0f;//判断单个波次内敌人是否生成完毕的计时器
+    private float timerNotSpawn = 0f;//记录波次间隔的计时器
+    private bool isSpawn = true;//是否为波次生成时
+    private int spawnCount = 1;//波次计数
+
+    public bool IsSpawn { get { return isSpawn; } }
+
+
+  private void Awake()
+      {
+          enemyList = Resources.Load<EnemyList>(typeof(EnemyList).Name);
+
+      }
 
     private void Start()
     {
+        enemyAmount = 10;
         // 不再使用 GameObject.Find("Enemy")
         enemySystem = GameObject.Find("EnemySystem");  // 找到 EnemySystem 对象
         InvokeRepeating(nameof(GenerateEnemy), 2f, enemyInterval);
     }
 
-    private void GenerateEnemy()
+    private void Update()
     {
+      if (isSpawn)
+      {
+        timerIsSpawn += Time.deltaTime;
+        if (timerIsSpawn > enemyInterval * enemyAmount)
+        {
+          isSpawn = false;
+          ++spawnCount;
+          timerIsSpawn = 0;
+        }
+      }
+      else
+      {
+        timerNotSpawn += Time.deltaTime;
+        if (timerNotSpawn > spawnInterval)
+        {
+          isSpawn = true;
+          enemyAmount += spawnCount * 3;
+          timerNotSpawn = 0;
+        }
+
+    }
+    }
+
+  private void GenerateEnemy()
+    {
+      if (isSpawn)
+      {
         // 通过权重随机获取敌人类型
         if (enemyList != null && enemyList.list != null)
         {
-            float totalWeight = 0f;
-            foreach (EnemyData tmp in enemyList.list)
-            {
-                totalWeight += tmp.weight;
-            }
+          float totalWeight = 0f;
+          foreach (EnemyData tmp in enemyList.list)
+          {
+            totalWeight += tmp.weight;
+          }
 
-            float randomValue = Random.value * totalWeight;
-            foreach (EnemyData tmp in enemyList.list)
+          float randomValue = Random.value * totalWeight;
+          foreach (EnemyData tmp in enemyList.list)
+          {
+            randomValue -= tmp.weight;
+            if (randomValue <= 0f)
             {
-                randomValue -= tmp.weight;
-                if (randomValue <= 0f)
-                {
-                    enemyData = tmp;
-                    break;
-                }
+              enemyData = tmp;
+              break;
             }
+          }
         }
 
         if (enemyData != null)
         {
-            Vector2 randomSpawnPosition = GetRandSpawnPosOutScreen();
-            // 使用worldSpawnPosition怪物始终左下角生成
-            // Vector3 worldSpawnPosition = Camera.main.ScreenToWorldPoint(randomSpawnPosition);
+          Vector2 randomSpawnPosition = GetRandSpawnPosOutScreen();
+          // 使用worldSpawnPosition怪物始终左下角生成
+          // Vector3 worldSpawnPosition = Camera.main.ScreenToWorldPoint(randomSpawnPosition);
 
-            //Debug.Log($"Spawn Position: {worldSpawnPosition}");
+          //Debug.Log($"Spawn Position: {worldSpawnPosition}");
 
-            Instantiate(enemyData.enemyPrefab, randomSpawnPosition, Quaternion.identity, enemySystem.transform.GetChild(0));
+          Instantiate(enemyData.enemyPrefab, randomSpawnPosition, Quaternion.identity, enemySystem.transform.GetChild(0));
         }
+      }
     }
 
 

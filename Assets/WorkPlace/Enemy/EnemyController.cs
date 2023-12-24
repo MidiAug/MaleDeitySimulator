@@ -22,6 +22,7 @@ public class EnemyController : MonoBehaviour
 
     private GameObject enemySystem;
     private GameObject player;
+    private GameObject crystal;//坤门水晶
 
     private Audio enemyAudio;//敌人的音效插件 目前包内只有受击、死亡的音效
 
@@ -57,6 +58,7 @@ public class EnemyController : MonoBehaviour
         enemyAudio = GameObject.FindGameObjectWithTag("Audio").GetComponent<Audio>();
         enemySystem = GameObject.Find("EnemySystem");        
         player = GameObject.FindGameObjectWithTag("Player");
+        crystal = GameObject.FindGameObjectWithTag("Crystal");
 
         firePoint = transform;
 
@@ -93,40 +95,50 @@ public class EnemyController : MonoBehaviour
     // 追踪玩家
     private void Move()
     {
-        if (player != null)
-        {
-            //获取一个指向玩家的向量
-            transform.position = Vector2.MoveTowards(transform.position, player.transform.position, enemyData.moveSpeed * Time.deltaTime);
-            
-            // 根据玩家与敌人的x轴坐标，翻转图像
-            if (transform.position.x > player.transform.position.x)
-            {
-                Flip(true);
-            }
-            else if (transform.position.x < player.transform.position.x)
-            {
-                Flip(false);
-            }
-            animator.SetBool("Run", true);
-        }
+      if (enemyData.Name != "hyr" && player != null)
+        //获取一个指向玩家的向量
+        transform.position = Vector2.MoveTowards(transform.position, player.transform.position, enemyData.moveSpeed * Time.deltaTime);
+
+      else if (enemyData.Name == "hyr" && crystal != null)
+        transform.position = Vector2.MoveTowards(transform.position, crystal.transform.position, enemyData.moveSpeed * Time.deltaTime);
+      
+      // 根据玩家与敌人的x轴坐标，翻转图像
+      if (transform.position.x > player.transform.position.x)
+        Flip(true);
+
+      else if (transform.position.x < player.transform.position.x)
+        Flip(false);
+
+      animator.SetBool("Run", true);
+
     }
 
-    // 碰撞伤害
-    private void OnTriggerStay2D(Collider2D collision)
+  // 碰撞伤害
+  private void OnTriggerStay2D(Collider2D collision)
     {
-        if (!die)
+      if (!die)
+      {
+        if (collision.gameObject.CompareTag("Player"))
         {
-            //如果碰撞物来自玩家，则调用Attacked受到相应的伤害
-            //TODO:这里敌人默认受到伤害为10，后续应该需要获取玩家的装备系统以获取正确的伤害值
-            if (collision.gameObject.tag == "Player"&&collision.GetType().ToString()== "UnityEngine.CapsuleCollider2D")
-            {
-                collision.GetComponent<PlayerController>().Attacked(10f);
-            }
+          PlayerController playerController = collision.GetComponent<PlayerController>();
+          if (playerController != null)
+          {
+            playerController.Attacked(10f);
+          }
         }
-    }
+        else if (collision.gameObject.CompareTag("Crystal"))
+        {
+          CrystallController crystalController = collision.gameObject.GetComponent<CrystallController>();
+          if (crystalController != null)
+          {
+            crystalController.Attacked(10f);
+          }
+        }
+      }
+  }
 
-    // 受到攻击
-    public void Attacked(float damage)
+  // 受到攻击
+  public void Attacked(float damage)
     {
         curHp -= damage;
         //播放受击音效

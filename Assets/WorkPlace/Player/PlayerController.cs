@@ -16,6 +16,7 @@ public class PlayerController : MonoBehaviour
     private Slider expSlider;
     private Text levelText;
     private Slider hpSlider;
+    private CrystallController crystallController;
 
     //人物相关属性
     private float moveSpeed = 5f;
@@ -44,6 +45,7 @@ public class PlayerController : MonoBehaviour
         rbody = GetComponent<Rigidbody2D>();
         sRenderer = GetComponent<SpriteRenderer>();
         playerAudio = GameObject.FindGameObjectWithTag("Audio").GetComponent<Audio>();
+        crystallController = GameObject.FindGameObjectWithTag("Crystal").GetComponent<CrystallController>();
 
         playerUI = GameObject.Find("PlayerUI");
         hpSlider = playerUI.transform.GetChild(0).gameObject.GetComponent<Slider>();
@@ -65,10 +67,12 @@ public class PlayerController : MonoBehaviour
             hpSlider.value = curHp / maxHp;
             expSlider.value = curExp / maxExp;
         }
-    }
+        if (Input.GetKeyDown(KeyCode.C))
+          InLevel();
+     }
 
-    // 角色的移动方法
-    void Move()
+  // 角色的移动方法
+  void Move()
     {
         float horizontal = Input.GetAxisRaw("Horizontal");
         float vertical = Input.GetAxisRaw("Vertical");
@@ -117,20 +121,26 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    //增加玩家生命值
+
+    public void CrystalFallen()
+    {
+      Attacked(maxExp);
+    }
+
+  //增加玩家生命值
     public void InHealth(float val)
-    {
-        if(val<=0)
-        {
-            Debug.Log("错误，增加量小于0");
-        }
-        curHp = Mathf.Clamp(curHp + val, 0 , maxHp);
-    }
-    // 销毁人物对象
-    private void KillPlayer()
-    {
-        Destroy(gameObject);
-    }
+      {
+          if(val<=0)
+          {
+              Debug.Log("错误，增加量小于0");
+          }
+          curHp = Mathf.Clamp(curHp + val, 0 , maxHp);
+      }
+      // 销毁人物对象
+      private void KillPlayer()
+      {
+          Destroy(gameObject);
+      }
 
     // 人物收到攻击动画
     // 协程(IEnumerator)用于播放人物受到攻击时的闪烁动画
@@ -156,30 +166,56 @@ public class PlayerController : MonoBehaviour
     // 获得经验
     public void InExp(float newExp)
     {
+      if (curExp < maxExp)
         curExp += newExp;
-        if(curExp>=maxExp)
+      else if (curExp > maxExp)
+      {
+        curExp = maxExp;
+      }
+    }
+
+  // 等级提升
+    private void InLevel()
+    {
+        float dist2Crystal = Vector2.Distance(transform.position, crystallController.transform.position);
+        if (curExp == maxExp && dist2Crystal < 10f)
         {
-            InLevel();
+          ++curLevel;
+          curExp = 0;
+          levelText.text = "lv." + curLevel.ToString();
+
+          //播放升级音效
+          playerAudio.PlaySFX(playerAudio.levelUp);
+          maxExp += 80;
+
+          //升级效果
+          int index = (int)(Mathf.Ceil(Random.value * 10) % 3);
+          //加血
+          if (index == 0)
+          {
+            maxHp += 10;
+            curHp = maxHp;
+          }
+          //加移速
+          else if (index == 1)
+            moveSpeed *= 1.1f;
+          
+          //扣血
+          else
+          {
+            float hp = maxHp - 10;
+            if (curHp < hp)
+              maxHp = hp;
+            else
+            {
+              curHp = hp;
+              maxHp = hp;
+            }
+          }
         }
     }
 
-    // 等级提升
-    private void InLevel()
-    {
-        maxHp += 10;
-        curHp = maxHp;
-
-        curLevel++;
-        curExp = 0;
-        levelText.text = "lv." + curLevel.ToString();
-
-        //播放升级音效
-        playerAudio.PlaySFX(playerAudio.levelUp);
-
-        maxExp += 60; // 具体值待定
-    }
-
-    public IEnumerator InlevelAni(int time)
+public IEnumerator InlevelAni(int time)
     {
         yield return new WaitForSeconds(time);
     }

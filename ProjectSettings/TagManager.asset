@@ -12,6 +12,7 @@ TagManager:
   - Audio
   - item
   - GameUI
+  - Crystal
   layers:
   - Default
   - TransparentFX

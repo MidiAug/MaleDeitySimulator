@@ -44,5 +44,10 @@ public class ArrowController : MonoBehaviour
             // 如果碰到障碍物，销毁箭矢
             Destroy(gameObject);
         }
+        else if (other.CompareTag("Crystal"))
+        {
+          other.GetComponent<CrystallController>().Attacked(damage);
+          Destroy(gameObject);
+        }
     }
 }
