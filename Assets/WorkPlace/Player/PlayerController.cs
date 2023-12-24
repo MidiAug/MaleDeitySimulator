@@ -193,7 +193,7 @@ public class PlayerController : MonoBehaviour
           playerAudio.PlaySFX(playerAudio.levelUp);
           maxExp += 80;
 
-          //升级效果
+         /* //升级效果
           int index = (int)(Mathf.Ceil(Random.value * 10) % 3);
           //加血
           if (index == 0)
@@ -216,7 +216,7 @@ public class PlayerController : MonoBehaviour
               curHp = hp;
               maxHp = hp;
             }
-          }
+          }*/
         }
     }
     //等级提升选项
