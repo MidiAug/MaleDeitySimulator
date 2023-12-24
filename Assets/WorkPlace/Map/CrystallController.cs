@@ -19,11 +19,12 @@ public class CrystallController : MonoBehaviour
     private BoxCollider2D boxCollider2;
     private Slider healthBar;
 
+    private Slider healthBarInterval;
 
     void Start()
     {
         playerController = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
-        healthBar = GameObject.Find("CrystalUI").transform.GetChild(0).gameObject.GetComponent<Slider>();
+        healthBar = transform.Find("CrystalUI").GetChild(0).GetComponent<Slider>();
         curHealth = maxHealth;
     }
 
@@ -38,6 +39,7 @@ public class CrystallController : MonoBehaviour
                 isInvincibleTimer = 0;
             }
         }
+
         healthBar.value = curHealth / maxHealth;
     }
 

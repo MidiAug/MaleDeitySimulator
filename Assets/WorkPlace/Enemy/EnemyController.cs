@@ -40,6 +40,8 @@ public class EnemyController : MonoBehaviour
     private float conProb = 5;
     private float boxProb = 3;
     private float nonProb = 1;
+
+    
     /// <summary>
     /// EnemyController的相关方法
     /// </summary>
@@ -95,19 +97,28 @@ public class EnemyController : MonoBehaviour
     // 追踪玩家
     private void Move()
     {
-      if (enemyData.Name != "hyr" && player != null)
-        //获取一个指向玩家的向量
-        transform.position = Vector2.MoveTowards(transform.position, player.transform.position, enemyData.moveSpeed * Time.deltaTime);
+        if (enemyData.Name != "hyr" && player != null)
+        {
+            //获取一个指向玩家的向量
+            transform.position = Vector2.MoveTowards(transform.position, player.transform.position, enemyData.moveSpeed * Time.deltaTime);
+            if (transform.position.x > player.transform.position.x)
+                Flip(true);
 
-      else if (enemyData.Name == "hyr" && crystal != null)
-        transform.position = Vector2.MoveTowards(transform.position, crystal.transform.position, enemyData.moveSpeed * Time.deltaTime);
-      
+            else if (transform.position.x < player.transform.position.x)
+                Flip(false);
+
+        }
+
+        else if (enemyData.Name == "hyr" && crystal != null)
+        {
+            transform.position = Vector2.MoveTowards(transform.position, crystal.transform.position, enemyData.moveSpeed * Time.deltaTime);
+            if (transform.position.x > crystal.transform.position.x)
+                Flip(true);
+
+            else if (transform.position.x < crystal.transform.position.x)
+                Flip(false);
+        }
       // 根据玩家与敌人的x轴坐标，翻转图像
-      if (transform.position.x > player.transform.position.x)
-        Flip(true);
-
-      else if (transform.position.x < player.transform.position.x)
-        Flip(false);
 
       animator.SetBool("Run", true);
 
@@ -126,9 +137,10 @@ public class EnemyController : MonoBehaviour
             playerController.Attacked(10f);
           }
         }
-        else if (collision.gameObject.CompareTag("Crystal"))
+        
+        else if (collision.gameObject.CompareTag("Crystal")&&collision.GetType().ToString() == "UnityEngine.PolygonCollider2D")
         {
-          CrystallController crystalController = collision.gameObject.GetComponent<CrystallController>();
+          CrystallController crystalController = collision.transform.parent.GetComponent<CrystallController>();
           if (crystalController != null)
           {
             crystalController.Attacked(10f);

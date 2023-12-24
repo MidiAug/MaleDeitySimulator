@@ -46,7 +46,7 @@ public class ArrowController : MonoBehaviour
         }
         else if (other.CompareTag("Crystal"))
         {
-          other.GetComponent<CrystallController>().Attacked(damage);
+          other.transform.parent.GetComponent<CrystallController>().Attacked(damage);
           Destroy(gameObject);
         }
     }

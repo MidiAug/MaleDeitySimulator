@@ -12,6 +12,7 @@ public class PlayerController : MonoBehaviour
     private Animator ani;
     private Rigidbody2D rbody;
     private SpriteRenderer sRenderer;
+    private SpriteRenderer kunRenderer;
     private GameObject playerUI;
     private Slider expSlider;
     private Text levelText;
@@ -41,15 +42,16 @@ public class PlayerController : MonoBehaviour
 
     //选择人物升级方向
     public GameObject choosemenu;
+    public GameObject crystal;
     void Start()
     {
         // 获取组件，初始化角色血量
         ani = GetComponent<Animator>();
         rbody = GetComponent<Rigidbody2D>();
         sRenderer = GetComponent<SpriteRenderer>();
+        kunRenderer = transform.GetChild(4).GetComponent<SpriteRenderer>();
         playerAudio = GameObject.FindGameObjectWithTag("Audio").GetComponent<Audio>();
-        crystallController = GameObject.FindGameObjectWithTag("Crystal").GetComponent<CrystallController>();
-
+        crystallController = crystal.GetComponent<CrystallController>();
         playerUI = GameObject.Find("PlayerUI");
         hpSlider = playerUI.transform.GetChild(0).gameObject.GetComponent<Slider>();
         expSlider = playerUI.transform.GetChild(1).gameObject.GetComponent<Slider>();
@@ -155,6 +157,7 @@ public class PlayerController : MonoBehaviour
         {
             // 切换人物的渲染状态，实现显示和隐藏的效果
             sRenderer.enabled = !sRenderer.enabled;
+            kunRenderer.enabled = !kunRenderer.enabled;
 
             // 等待指定的时间间隔
             yield return new WaitForSeconds(time);
@@ -162,6 +165,7 @@ public class PlayerController : MonoBehaviour
 
         // 循环结束后，将人物的渲染状态设置为显示
         sRenderer.enabled = true;
+        kunRenderer.enabled = true;
 
         // 表示角色可以接受下一次伤害
         isInvincible = false;
