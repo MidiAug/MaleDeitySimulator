@@ -1,11 +1,14 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.Serialization;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
+
 [Serializable]
+
 public class ItemSpawnData
 {
     public GameObject Prefab;
@@ -37,6 +40,9 @@ public class MapGenerator : MonoBehaviour
     public TileBase waterTile;
 
     private float[,] mapData; // Ture:ground，Flase:water
+
+    public GameObject randomProps;
+
 
     public void GenerateMap()
     {
@@ -189,7 +195,7 @@ public class MapGenerator : MonoBehaviour
                                 // 生成在地图范围内
                                 if (IsInMapRange(x, y))
                                 {
-                                    Instantiate(itemSpawnDatas[i].Prefab, new Vector3(x, y, 0), Quaternion.identity);
+                                    Instantiate(itemSpawnDatas[i].Prefab, new Vector3(x, y, 0), Quaternion.identity, randomProps.transform);
                                 }
                             }
                             break;

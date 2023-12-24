@@ -11,6 +11,8 @@ public class CoincCtrl : MonoBehaviour
     float moveSpeed = 12;
     PlayerController playerController;
     private Audio audio;
+
+    private float getDist = 4f;
     // Start is called before the first frame update
     void Start()
     {
@@ -29,7 +31,8 @@ public class CoincCtrl : MonoBehaviour
         if (player != null)
         {
             //获取一个指向玩家的向量
-            transform.position = Vector2.MoveTowards(transform.position, player.transform.position, moveSpeed * Time.deltaTime);
+            if(Vector2.Distance(transform.position, player.transform.position) < getDist)
+                transform.position = Vector2.MoveTowards(transform.position, player.transform.position, moveSpeed * Time.deltaTime);
 
             // 根据玩家与敌人的x轴坐标，翻转图像
         }
