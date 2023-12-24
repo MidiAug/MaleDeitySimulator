@@ -38,6 +38,9 @@ public class PlayerController : MonoBehaviour
 
     //加载人物死亡界面
     public GameObject deadmenu;
+
+    //选择人物升级方向
+    public GameObject choosemenu;
     void Start()
     {
         // 获取组件，初始化角色血量
@@ -56,6 +59,7 @@ public class PlayerController : MonoBehaviour
         coinNum = 0;
         //初始不要加载死亡界面
         deadmenu.SetActive(false);
+        choosemenu.SetActive(false);
     }
 
     void Update()
@@ -180,6 +184,7 @@ public class PlayerController : MonoBehaviour
         float dist2Crystal = Vector2.Distance(transform.position, crystallController.transform.position);
         if (curExp == maxExp && dist2Crystal < 10f)
         {
+          choosemenu.SetActive(true);
           ++curLevel;
           curExp = 0;
           levelText.text = "lv." + curLevel.ToString();
@@ -214,7 +219,18 @@ public class PlayerController : MonoBehaviour
           }
         }
     }
-
+    //等级提升选项
+    public void plushp()
+    {
+        maxHp += 10;
+        curHp = maxHp;
+        choosemenu.SetActive(false);
+    }
+    public void plusspeed()
+    {
+        moveSpeed *= 1.1f;
+        choosemenu.SetActive(false);
+    }
 public IEnumerator InlevelAni(int time)
     {
         yield return new WaitForSeconds(time);

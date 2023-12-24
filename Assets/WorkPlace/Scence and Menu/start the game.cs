@@ -9,4 +9,12 @@ public class startthegame : MonoBehaviour
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
+    public void ReturnMenu()
+    {
+        SceneManager.LoadScene("startscences");
+    }
+    public void HelpMenu()
+    {
+        SceneManager.LoadScene("help");
+    }
 }
