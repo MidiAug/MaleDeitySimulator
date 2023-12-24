@@ -47,10 +47,11 @@ public class Inventorymanager : MonoBehaviour
         switch (item.Itemname)
         {
             default: //在Itemassets中挂载着所有所需物品的图片，直接引用即可
-            case "bloodpacks": iteminform = "Here are some bloodpacks!  You can click the ‘f’ to use it"; break;
-            case "copperCoin": iteminform = "Here are some bloodpacks! You can click the ‘f’ to use it"; break;
-            case "goldCoin": iteminform = "Here are some bloodpacks! You can click the ‘f’ to use it"; break;
-            case "silverCoin": iteminform = "Here are some bloodpacks!  You can click the ‘f’ to use it"; break;
+            case "bloodpacks": iteminform = "Here are some bloodpacks!  You can click the ‘1’ to use it"; break;
+            case "damagepacks": iteminform = "Here are some damagepacks!  You can click the ‘2’ to use it"; break;
+                //case "copperCoin": iteminform = "Here are some bloodpacks! You can click the ‘f’ to use it"; break;
+                //case "goldCoin": iteminform = "Here are some bloodpacks! You can click the ‘f’ to use it"; break;
+                //case "silverCoin": iteminform = "Here are some bloodpacks!  You can click the ‘f’ to use it"; break;
         }
         return iteminform;
     }

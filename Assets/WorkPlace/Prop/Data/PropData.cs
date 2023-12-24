@@ -11,6 +11,5 @@ public class PropData:ScriptableObject
     public float val;// 值的类型很多，比如血包的回复值，金币的金额等等
     public float weight;// 权重
     [TextArea] public string info;
-
     public GameObject prefab;
 }

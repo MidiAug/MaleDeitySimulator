@@ -37,9 +37,10 @@ public class BoxController : MonoBehaviour
                 {
                     default:
                     case "bloodpacks": item.itemType = Item.ItemType.bloodpacks; item.Itemname = "bloodpacks"; break;
-                    case "silverCoin": item.itemType = Item.ItemType.silverCoin; item.Itemname = "silverCoin"; break;
-                    case "goldCoin": item.itemType = Item.ItemType.goldCoin; item.Itemname = "goldCoin"; break;
-                    case "copperCoin": item.itemType = Item.ItemType.copperCoin; item.Itemname = "copperCoin"; break;
+                    //case "goldcoins": item.itemType = Item.ItemType.damagepacks; item.Itemname = "damagepacks"; break;
+                    //case "silverCoin": item.itemType = Item.ItemType.damagepacks; item.Itemname = "damagepacks"; break;
+                    case "goldCoin": item.itemType = Item.ItemType.damagepacks; item.Itemname = "damagepacks"; break;
+                    //case "copperCoin": item.itemType = Item.ItemType.damagepacks; item.Itemname = "damagepacks"; break;
                 }//遍历列表中的物品，当在当前物品的时候总权值小于零则判定掉落这个物品，然后设置掉落物的名称，种类
                 Dropitem.Createitem(transform.position, item, false);
                 //Instantiate(tmp.prefab, transform.position, Quaternion.identity);原代码

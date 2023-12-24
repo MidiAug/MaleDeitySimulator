@@ -126,14 +126,6 @@ public class PlayerController : MonoBehaviour
         }
         curHp = Mathf.Clamp(curHp + val, 0 , maxHp);
     }
-    public float GetcurHp()
-    {
-        return curHp;
-    }
-    public void SetcurHp(float Hp)
-    {
-        curHp=Hp;
-    }
     // 销毁人物对象
     private void KillPlayer()
     {
@@ -187,7 +179,7 @@ public class PlayerController : MonoBehaviour
         maxExp += 60; // 具体值待定
     }
 
-    IEnumerator InlevelAni(int time)
+    public IEnumerator InlevelAni(int time)
     {
         yield return new WaitForSeconds(time);
     }

@@ -6,7 +6,7 @@ public class Dropitem : MonoBehaviour
 {
     public Item item;
    
-    public static Dropitem Createitem(Vector2 position, Item item,bool Isdrop)//是否通过丢弃的形式创建，后面把掉落物也用这个函数生成
+    public static Dropitem Createitem(Vector2 position, Item item, bool Isdrop)//是否通过丢弃的形式创建，后面把掉落物也用这个函数生成
     {
         Vector2 Dropdir = Vector2.zero; 
         GameObject newDropitem;
