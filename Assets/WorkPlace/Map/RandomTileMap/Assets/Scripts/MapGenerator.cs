@@ -43,7 +43,27 @@ public class MapGenerator : MonoBehaviour
 
     public GameObject randomProps;
 
+    public void ClearGeneratedObjects()
+    {
+        // 在 randomProps 下找到所有生成的预制体并销毁它们
+        foreach (Transform child in randomProps.transform)
+        {
+            Destroy(child.gameObject);
+        }
+    }
 
+    void Start()
+    {
+        // 调用生成地图的方法
+        GenerateMap();
+    }
+
+    // 在游戏结束时调用清除方法
+    void GameOver()
+    {
+        // 调用清除方法
+        ClearGeneratedObjects();
+    }
     public void GenerateMap()
     {
         itemSpawnDatas.Sort((data1, data2) =>
