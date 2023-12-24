@@ -13,16 +13,12 @@ public class PropController : MonoBehaviour
     PlayerController playerController;
 
     private bool KeyCode_F;// F 键拾取
-    private GameObject tar;
     private RectTransform target;//指向要移动的目的
 
     PickUoCoinAnimation pickUpAnimation;
     // Start is called before the first frame update
     void Start()
     {
-        tar = GameObject.Find("Coin").transform.GetChild(0).gameObject;
-        target = tar.GetComponent<RectTransform>();
-
         playerController = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
         pickUpAnimation = GetComponent<PickUoCoinAnimation>();
     }

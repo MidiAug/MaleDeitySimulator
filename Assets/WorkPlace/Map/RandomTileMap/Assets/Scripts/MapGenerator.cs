@@ -8,8 +8,8 @@ using UnityEngine.Tilemaps;
 [Serializable]
 public class ItemSpawnData
 {
-    public TileBase tile;
-    public int wegith;
+    public GameObject Prefab;
+    public int weight;
 }
 
 public class MapGenerator : MonoBehaviour
@@ -42,7 +42,7 @@ public class MapGenerator : MonoBehaviour
     {
         itemSpawnDatas.Sort((data1, data2) =>
         {
-            return data1.wegith.CompareTo(data2.wegith);
+            return data1.weight.CompareTo(data2.weight);
         });
         GenerateMapData();
         // 地图处理
@@ -166,7 +166,7 @@ public class MapGenerator : MonoBehaviour
         int weightTotal = 0;
         for (int i = 0; i < itemSpawnDatas.Count; i++)
         {
-            weightTotal += itemSpawnDatas[i].wegith;
+            weightTotal += itemSpawnDatas[i].weight;
         }
 
         for (int x = 0; x < width; x++)
@@ -180,13 +180,17 @@ public class MapGenerator : MonoBehaviour
 
                     for (int i = 0; i < itemSpawnDatas.Count; i++)
                     {
-                        temp += itemSpawnDatas[i].wegith;
+                        temp += itemSpawnDatas[i].weight;
                         if (randValue < temp)
                         {
                             // 命中
-                            if (itemSpawnDatas[i].tile)
+                            if (itemSpawnDatas[i].Prefab)
                             {
-                                itemTileMap.SetTile(new Vector3Int(x, y), itemSpawnDatas[i].tile);
+                                // 生成在地图范围内
+                                if (IsInMapRange(x, y))
+                                {
+                                    Instantiate(itemSpawnDatas[i].Prefab, new Vector3(x, y, 0), Quaternion.identity);
+                                }
                             }
                             break;
                         }
@@ -195,7 +199,6 @@ public class MapGenerator : MonoBehaviour
             }
         }
     }
-
 
     public bool IsInMapRange(int x, int y)
     {
