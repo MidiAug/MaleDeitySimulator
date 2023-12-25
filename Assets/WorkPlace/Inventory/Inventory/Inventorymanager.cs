@@ -49,8 +49,8 @@ public class Inventorymanager : MonoBehaviour
             default: //在Itemassets中挂载着所有所需物品的图片，直接引用即可
             case "bloodpacks": iteminform = "Here are some bloodpacks!  You can click the ‘1’ to use it"; break;
             case "damagepacks": iteminform = "Here are some damagepacks!  You can click the ‘2’ to use it"; break;
-            case "crytalpacks": iteminform = "Here are some crytalpacks!  You can click the ‘3’ to use it"; break;
-            case "wudipacks": iteminform = "Here are some wudipacks!  You can click the ‘4’ to use it"; break;
+            case "crytalpacks": iteminform = "Here are some crytalpacks!  You can click the ‘4’ to use it"; break;
+            case "wudipacks": iteminform = "Here are some wudipacks!  You can click the ‘3’ to use it"; break;
 
         }
         return iteminform;
