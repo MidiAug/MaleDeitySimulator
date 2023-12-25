@@ -195,9 +195,9 @@ public class MapGenerator : MonoBehaviour
             weightTotal += itemSpawnDatas[i].weight;
         }
 
-        for (int x = 0; x < width; x++)
+        for (int x = 0; x < width/2-4; x++)
         {
-            for (int y = 0; y < height; y++)
+            for (int y = 0; y < height/2-4; y++)
             {
                 if (IsGround(x, y) && GetEigthNeighborsGroundCount(x, y) == 8) // 只有地面可以生成物品
                 {
@@ -240,7 +240,13 @@ public class MapGenerator : MonoBehaviour
     public void CleanTileMap()
     {
         groundTileMap.ClearAllTiles();
-        itemTileMap.ClearAllTiles();
+        while (randomProps.transform.childCount > 0)
+        {
+            for (int i = 0; i < randomProps.transform.childCount; ++i)
+            {
+                DestroyImmediate(randomProps.transform.GetChild(i).gameObject);
+            }
+        }
     }
 
 }

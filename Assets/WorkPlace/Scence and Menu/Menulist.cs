@@ -22,6 +22,7 @@ public class Menu : MonoBehaviour
         volumeSlider.value = 1;
         audioSystem = GameObject.FindGameObjectWithTag("Audio").GetComponent<Audio>();
         menuList.SetActive(false);
+        gameUI.SetActive(true);
     }
 
     // Update is called once per frame
