@@ -48,14 +48,14 @@ public class pickupitem : MonoBehaviour
                         {
                            break;
                         }
-                        if (item.Itemamount > 1)
+                        if (item.Itemamount > 0)
                         {
                             item.Itemamount--;
                         }
-                        else
-                        {
-                            playerInventory.GetItemList().Remove(item);
-                        }
+                        //else
+                        //{
+                          //  playerInventory.GetItemList().Remove(item);
+                        //}
                         PlayerController.curHp += (PlayerController.maxHp) / 4;
                         if (PlayerController.curHp > PlayerController.maxHp)
                         {
@@ -89,14 +89,14 @@ public class pickupitem : MonoBehaviour
                         {
                             break;
                         }
-                        if (item.Itemamount > 1)
+                        if (item.Itemamount > 0)
                         {
                             item.Itemamount--;
                         }
-                        else
-                        {
-                            playerInventory.GetItemList().Remove(item);
-                        }
+                        //else
+                        //{
+                        //  playerInventory.GetItemList().Remove(item);
+                        //}
                         crystallController.curHealth += (crystallController.maxHealth) / 4;
                         if (crystallController.curHealth > crystallController.maxHealth)
                         {
@@ -121,14 +121,14 @@ public class pickupitem : MonoBehaviour
 
                 if (item.Itemname == "damagepacks" && item.Itemamount != 0)
                 {
-                    if (item.Itemamount > 1)
+                    if (item.Itemamount > 0)
                     {
                         item.Itemamount--;
                     }
-                    else
-                    {
-                        playerInventory.GetItemList().Remove(item);
-                    }
+                    //else
+                    //{
+                    //  playerInventory.GetItemList().Remove(item);
+                    //}
 
                     Damageup();
                     Inventorymanager.Instance.Refreshinventoryui();
@@ -156,14 +156,14 @@ public class pickupitem : MonoBehaviour
 
                 if (item.Itemname == "wudipacks" && item.Itemamount != 0)
                 {
-                    if (item.Itemamount > 1)
+                    if (item.Itemamount > 0)
                     {
                         item.Itemamount--;
                     }
-                    else
-                    {
-                        playerInventory.GetItemList().Remove(item);
-                    }
+                    //else
+                    //{
+                    //  playerInventory.GetItemList().Remove(item);
+                    //}
                     float elapsedTime = 0f;
                     float invincibleDuration = 5f;
                     Inventorymanager.Instance.Refreshinventoryui();
