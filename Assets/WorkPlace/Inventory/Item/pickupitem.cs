@@ -42,7 +42,7 @@ public class pickupitem : MonoBehaviour
                 if (playerInventory.GetItemList()[i] != null)
                 {
                     Item item = playerInventory.GetItemList()[i];
-                    if (item.Itemname == "bloodpacks")
+                    if (item.Itemname == "bloodpacks"&&item.Itemamount!=0)
                     {
                         if (PlayerController.curHp == PlayerController.maxHp)
                         {
@@ -83,7 +83,7 @@ public class pickupitem : MonoBehaviour
                 if (playerInventory.GetItemList()[i] != null)
                 {
                     Item item = playerInventory.GetItemList()[i];
-                    if (item.Itemname == "crytalpacks")
+                    if (item.Itemname == "crytalpacks" && item.Itemamount != 0)
                     {
                         if (crystallController.curHealth == crystallController.maxHealth)
                         {
@@ -119,7 +119,7 @@ public class pickupitem : MonoBehaviour
             {
                 Item item = playerInventory.GetItemList()[i];
 
-                if (item.Itemname == "damagepacks")
+                if (item.Itemname == "damagepacks" && item.Itemamount != 0)
                 {
                     if (item.Itemamount > 1)
                     {
@@ -154,7 +154,7 @@ public class pickupitem : MonoBehaviour
             {
                 Item item = playerInventory.GetItemList()[i];
 
-                if (item.Itemname == "wudipacks")
+                if (item.Itemname == "wudipacks" && item.Itemamount != 0)
                 {
                     if (item.Itemamount > 1)
                     {

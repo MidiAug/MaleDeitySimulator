@@ -18,15 +18,20 @@ public class Drop : MonoBehaviour,IPointerClickHandler
         if (eventData.button == PointerEventData.InputButton.Right)
         {
             //丢弃物品
-            Dropitem.Createitem(Inventorymanager.Instance.Getplayer().transform.position, Orignalitem, true);//因为Inventorymanager挂载在人物身上
-            if (item.Itemamount > 1)
+            if (item.Itemamount == 0)
+            {
+                return;
+            }
+            Dropitem.Createitem(Inventorymanager.Instance.Getplayer().transform.position, Orignalitem, true);
+            //因为Inventorymanager挂载在人物身上
+            if (item.Itemamount >0)
             {
                 item.Itemamount--;
             }
-            else
-            {
-                playerinventory.GetItemList().Remove(item);
-            }
+            //else
+            //{
+            //    playerinventory.GetItemList().Remove(item);
+            //}
             Inventorymanager.Instance.Refreshinventoryui();
         }
     }
